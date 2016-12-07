@@ -1,6 +1,8 @@
 using UnityEngine;
-class RepairStation : Structure {
+
+public class Relay : Structure {
     
+
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
     /// any of the Update methods is called the first time.
@@ -11,10 +13,4 @@ class RepairStation : Structure {
         gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
     }
 
-    /// <summary>
-    /// Update is called every frame, if the MonoBehaviour is enabled.
-    /// </summary>
-    void Update() {
-        
-    }
 }

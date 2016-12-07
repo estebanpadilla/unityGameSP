@@ -4,13 +4,14 @@ public class LDSUIManager : MonoBehaviour {
     
     private LDSGameManager gameManager;
 
-    private float screenWidth = Screen.width;
     private float screenHeight = Screen.height;
     private float ypos;
     private float xpos;
     private float buttonHeight = 50.0f;
     private float buttonWidth;
     
+    private GUIStyle style;
+
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
@@ -23,9 +24,12 @@ public class LDSUIManager : MonoBehaviour {
     /// any of the Update methods is called the first time.
     /// </summary>
     void Start() {
-        Debug.Log(screenWidth);
-        Debug.Log(screenHeight);
-        ypos = (screenHeight - ( buttonHeight + 10));
+        //Debug.Log(screenWidth);
+        //Debug.Log(screenHeight);
+        buttonWidth = 60.0f;
+        style = new GUIStyle();
+        style.fontSize = 20;
+        style.normal.textColor = Color.white;
     }
 
     /// <summary>
@@ -41,29 +45,36 @@ public class LDSUIManager : MonoBehaviour {
     /// </summary>
     void OnGUI() {
         
-        buttonWidth = 60.0f;
+        
         xpos = 10;
-         if (GUI.Button(new Rect(xpos, ypos, buttonWidth, buttonHeight), "Solar")) {
-            Debug.Log("Clicked the button with an image");
-         }
+        ypos = (screenHeight - ( buttonHeight + 10));
 
-         xpos += (buttonWidth + 10);
-         if (GUI.Button(new Rect(xpos, ypos, buttonWidth, buttonHeight), "Battery")) {
-            Debug.Log("Clicked the button with an image");
-         }
-         xpos += (buttonWidth + 10);
-         if (GUI.Button(new Rect(xpos, ypos, buttonWidth, buttonHeight), "Relay")) {
+        if (GUI.Button(new Rect(xpos, ypos, buttonWidth, buttonHeight), "Solar")) {
+        gameManager.addSolarStation();
+        }
 
-         }
+        xpos += (buttonWidth + 10);
+        if (GUI.Button(new Rect(xpos, ypos, buttonWidth, buttonHeight), "Battery")) {
+        gameManager.addBattery();
+        }
+        xpos += (buttonWidth + 10);
+        if (GUI.Button(new Rect(xpos, ypos, buttonWidth, buttonHeight), "Relay")) {
+            gameManager.addRelay();
+        }
 
-         xpos += (buttonWidth + 10);
-         if(GUI.Button(new Rect(xpos, ypos, buttonWidth, buttonHeight),"Repair")) {
+        xpos += (buttonWidth + 10);
+        if(GUI.Button(new Rect(xpos, ypos, buttonWidth, buttonHeight),"Repair")) {
+            gameManager.addRepairStation();
+        }
+        xpos += (buttonWidth + 10);
+        if (GUI.Button(new Rect(xpos, ypos, buttonWidth, buttonHeight), "Miner")) {
+            gameManager.addMiner();
+        }
 
-         }
-         xpos += (buttonWidth + 10);
-         if (GUI.Button(new Rect(xpos, ypos, buttonWidth, buttonHeight), "Miner")) {
-             gameManager.addMiner();
-         }
-
+        xpos = 10;
+        ypos = 10;
+    
+        GUI.Label(new Rect(xpos, ypos, 100, 50), string.Concat("Cash:", gameManager.player.Cash), style);
+        
     }
 }   

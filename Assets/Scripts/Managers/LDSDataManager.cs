@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class LDSDataManager  {
 
-	Dictionary<string, LDSData> ldsGameObjectsData = new Dictionary<string, LDSData>();	
+	Dictionary<string, LDSData> gameObjectsData = new Dictionary<string, LDSData>();	
 
 	public LDSDataManager(){
 		
@@ -20,8 +20,13 @@ public class LDSDataManager  {
 		
 		if ( objects != null ) {
 			foreach(LDSData item in objects) {
-				ldsGameObjectsData.Add(item.name, item);
+				gameObjectsData.Add(item.name, item);
 			}
 		}
 	}
+
+	public LDSData findGameObjectData(string key) {
+		return gameObjectsData[key];
+	}
+
 }
