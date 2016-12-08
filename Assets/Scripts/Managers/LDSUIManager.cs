@@ -70,9 +70,9 @@ public class LDSUIManager : MonoBehaviour
         }
 
         xpos += (buttonWidth + 10);
-        if (GUI.Button(new Rect(xpos, ypos, buttonWidth, buttonHeight), "Battery", buttonStyle))
+        if (GUI.Button(new Rect(xpos, ypos, buttonWidth, buttonHeight), "Enegy \nStorage", buttonStyle))
         {
-            gameManager.addBattery();
+            gameManager.addEnegyStorage();
         }
 
         xpos += (buttonWidth + 10);

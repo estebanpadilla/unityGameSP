@@ -7,7 +7,7 @@ public class LDSGameManager : MonoBehaviour
     public GameObject uiManagerPref;
     public GameObject strongholdPref;
     public GameObject solarStationPref;
-    public GameObject batteryPref;
+    public GameObject enegyStoragePref;
     public GameObject relayPref;
     public GameObject repairStationPref;
     public GameObject repairDromePref;
@@ -56,9 +56,9 @@ public class LDSGameManager : MonoBehaviour
         createObject("solarStation1");
     }
 
-    public void addBattery()
+    public void addEnegyStorage()
     {
-        createObject("battery1");
+        createObject("enegyStorage1");
     }
 
     public void addRelay()
@@ -105,10 +105,10 @@ public class LDSGameManager : MonoBehaviour
                     pool.Add(name, go);
                     script = go.GetComponent<SolarStation>();
                     break;
-                case "battery1":
-                    go = Instantiate(batteryPref, Vector3.zero, Quaternion.identity);
+                case "enegyStorage1":
+                    go = Instantiate(enegyStoragePref, Vector3.zero, Quaternion.identity);
                     pool.Add(name, go);
-                    script = go.GetComponent<Battery>();
+                    script = go.GetComponent<EnegyStorage>();
                     break;
                 case "relay1":
                     go = Instantiate(relayPref, Vector3.zero, Quaternion.identity);

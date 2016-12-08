@@ -19,7 +19,7 @@ public class LDSData
     public int workTime;
     public int workRate;
     public int efficiency;
-    public int defficiency;
+    public int deficiency;
 
     /* Variable use on structres that create or produce something like, 
 	* solarStation would use to represent the energy produce and the 

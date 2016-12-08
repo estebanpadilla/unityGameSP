@@ -1,5 +1,5 @@
 using UnityEngine;
-class Battery : Structure
+class EnegyStorage : Structure
 {
 
     void Start()
