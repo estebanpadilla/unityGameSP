@@ -1,23 +1,26 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Structure : MonoBehaviour {
+public class Structure : MonoBehaviour
+{
 
-	public GameObject structureRange;
-    
-	//Instance Variables
+    public GameObject structureRange;
+
+    //Instance Variables
     protected LDSGameManager gameManager;
-    public LDSGameManager GameManager { get {return this.gameManager; } set{ this.gameManager = value; }}
-	
-    protected LDSData data;
-	public LDSData Data { set { this.data = value; } get { return this.data; } }
+    public LDSGameManager GameManager { get { return this.gameManager; } set { this.gameManager = value; } }
 
-	protected List<string> upGradeKeys;
-	protected GameObject range;
+    protected LDSData data;
+    public LDSData Data { set { this.data = value; } get { return this.data; } }
+
+    protected List<string> upGradeKeys;
+    protected GameObject range;
     protected bool isPlaced = false;
-	
-    void OnMouseUp() {
-        if ( !isPlaced ) {
+
+    void OnMouseUp()
+    {
+        if (!isPlaced)
+        {
             isPlaced = true;
             gameObject.GetComponent<SpriteRenderer>().color = Color.white;
         }
@@ -27,16 +30,20 @@ public class Structure : MonoBehaviour {
     /// OnMouseDown is called when the user has pressed the mouse button while
     /// over the GUIElement or Collider.
     /// </summary>
-    void OnMouseDown() {
+    void OnMouseDown()
+    {
         this.gameManager.setCurrentObjectToDisplay(this);
     }
 
-    void OnMouseDrag() {
-        if ( !isPlaced ) { 
+    void OnMouseDrag()
+    {
+        if (!isPlaced)
+        {
             Vector3 point = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
             point.z = gameObject.transform.position.z;
             gameObject.transform.position = point;
             range.transform.position = point;
+            gameManager.findConnections(gameObject.transform.position);
         }
     }
 }
