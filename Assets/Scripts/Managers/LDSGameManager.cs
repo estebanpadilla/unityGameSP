@@ -1,21 +1,26 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class LDSGameManager : MonoBehaviour  {
 
 	//Game objects
-	public GameObject uiManager;
-	public GameObject stronghold;
-	public GameObject solarStation;
-	public GameObject battery;
-	public GameObject relay;
-	public GameObject repairStation;
-	public GameObject repairDrome;
-	public GameObject miner;
-	public GameObject asteroid;
+	public GameObject uiManagerPref;
+	public GameObject strongholdPref;
+	public GameObject solarStationPref;
+	public GameObject batteryPref;
+	public GameObject relayPref;
+	public GameObject repairStationPref;
+	public GameObject repairDromePref;
+	public GameObject minerPref;
+	public GameObject asteroidPref;
 
 	private LDSDataManager dataManager;
+	private LDSUIManager uiManager;
 	public Player player;
 
+	private int objectCounter = 0;
+	private Dictionary<string, GameObject> pool = new Dictionary<string, GameObject>();
+	public Dictionary<string, GameObject> Pool { get { return this.pool; } set { this.pool = value; }}
 
 	/// <summary>
 	/// Awake is called when the script instance is being loaded.
@@ -32,11 +37,12 @@ public class LDSGameManager : MonoBehaviour  {
 	/// </summary>
 	void Start() {
 		Debug.Log("LDSGameManager Star()");
-		Instantiate(uiManager, Vector3.zero, Quaternion.identity);
-		LDSData data = dataManager.findGameObjectData("stronghold");
-		GameObject sg0 = Instantiate(stronghold, Vector3.zero, Quaternion.identity);
-		Stronghold strongholdSc = sg0.GetComponent<Stronghold>();
-		strongholdSc.Data = data;
+
+		GameObject go = Instantiate(uiManagerPref, Vector3.zero, Quaternion.identity);
+		uiManager = go.GetComponent<LDSUIManager>();
+
+		createObject("stronghold");
+		
 	}
 	
 	// Update is called once per frame
@@ -45,47 +51,82 @@ public class LDSGameManager : MonoBehaviour  {
 	}
 
 	public void addSolarStation() {
-		LDSData data = dataManager.findGameObjectData("solarStation1");
-		if (player.hasEnoughCash( data.price )) {
-			GameObject go = Instantiate(solarStation, Vector3.zero, Quaternion.identity);
-			SolarStation script = go.GetComponent<SolarStation>();
-			script.Data = data;
-		}
+		createObject("solarStation1");
 	}
 
 	public void addBattery() {
-		LDSData data = dataManager.findGameObjectData("battery1");
-		if ( player.hasEnoughCash(data.price )) {
-			GameObject go = Instantiate(battery, Vector3.zero, Quaternion.identity);
-			Battery script = go.GetComponent<Battery>();
-			script.Data = data;
-		}
+		createObject("battery1");
 	}
 
 	public void addRelay() {
-		LDSData data = dataManager.findGameObjectData("relay1");
-		if (player.hasEnoughCash(data.price)) {
-			GameObject go = Instantiate(relay, Vector3.zero, Quaternion.identity);
-			Relay script = go.GetComponent<Relay>();
-			script.Data = data;
-		}
+		createObject("relay1");
 	}
 
 	public void addRepairStation(){
-		LDSData data = dataManager.findGameObjectData("repairStation1");
-		if ( player.hasEnoughCash(data.price )) {
-			GameObject go = Instantiate(repairStation, Vector3.zero, Quaternion.identity);
-			RepairStation script = go.GetComponent<RepairStation>();
-			script.Data = data;
-		}
+		createObject("repairStation1");
 	}
 
 	public void addMiner() {
-		LDSData data = dataManager.findGameObjectData("miner1");
-		if ( player.hasEnoughCash(data.price )) {
-			GameObject go = Instantiate(miner, Vector3.zero, Quaternion.identity);
-			Miner script = go.GetComponent<Miner>();
-			script.Data = data;
+		createObject("miner1");
+	}
+
+	public void setCurrentObjectToDisplay(Structure value){
+		this.uiManager.CurrentObject = value;
+	}
+
+	private void createObject(string value) {	
+
+		LDSData data = dataManager.findGameObjectData(value);
+		
+		if ( player.hasEnoughCash( data.price )) {
+			
+			GameObject go;
+			Structure script;
+			string name = string.Concat(value, "_", objectCounter);
+
+			switch (value) {
+				case "stronghold":
+					go = Instantiate(strongholdPref, Vector3.zero, Quaternion.identity);
+					pool.Add(name, go);
+					script = go.GetComponent<Stronghold>();
+				break;
+				case "solarStation1":
+					go = Instantiate(solarStationPref, Vector3.zero, Quaternion.identity);
+					pool.Add(name, go);
+					script = go.GetComponent<SolarStation>();
+				break;
+				case "battery1":
+					go = Instantiate(batteryPref, Vector3.zero, Quaternion.identity);
+					pool.Add(name, go);
+					script = go.GetComponent<Battery>();
+				break;
+				case "relay1":
+					go = Instantiate(relayPref, Vector3.zero, Quaternion.identity);
+					pool.Add(name, go);
+					script = go.GetComponent<Relay>();
+				break;
+				case "repairStation1":
+					go = Instantiate(repairStationPref, Vector3.zero, Quaternion.identity);
+					pool.Add(name, go);
+					script = go.GetComponent<RepairStation>();
+				break;
+				case "miner1":
+					go = Instantiate(minerPref, Vector3.zero, Quaternion.identity);
+					pool.Add(name, go);
+					script = go.GetComponent<Miner>();
+				break; 
+				default:
+					go = null;
+					script = null;
+				break;
+			}
+
+			if ( go != null) {
+				go.name = name;
+				script.Data = data;
+				script.GameManager = this;
+				objectCounter++;
+			}
 		}
 	}
 }

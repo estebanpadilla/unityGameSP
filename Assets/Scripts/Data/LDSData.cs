@@ -3,11 +3,13 @@ public class LDSData {
 	/*Variable for regular structures.*/
 	public string name;
 	public int price;
-	public int salePrice;
+	public float priceLost;
 	public int health;
 	public int damage;
 	public int armor;
 	public int currentLevel;
+	public string upgradeId;
+	public int upgradePrice;
 	public int range;
 	public int energyUsage;
 	public int creationTime;
