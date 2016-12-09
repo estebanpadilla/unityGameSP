@@ -17,6 +17,12 @@ public class Structure : MonoBehaviour
     protected GameObject range;
     protected bool isPlaced = false;
 
+    //Connection objects
+    protected GameObject[] ins;
+    public GameObject[] Ins { get { return this.ins; } set { this.ins = value; } }
+    protected GameObject[] outs;
+    public GameObject[] Outs { get { return this.outs; } set { this.outs = value; } }
+
     void OnMouseUp()
     {
         if (!isPlaced)
@@ -43,7 +49,7 @@ public class Structure : MonoBehaviour
             point.z = gameObject.transform.position.z;
             gameObject.transform.position = point;
             range.transform.position = point;
-            gameManager.findConnections(gameObject.transform.position);
+            gameManager.findConnections(gameObject);
         }
     }
 }

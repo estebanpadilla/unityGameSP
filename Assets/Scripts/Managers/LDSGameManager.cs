@@ -141,11 +141,41 @@ public class LDSGameManager : MonoBehaviour
         }
     }
 
-    public void findConnections(Vector3 position)
+    public void findConnections(GameObject toObject)
     {
-        foreach (GameObject item in Pool.Values)
+        bool isInConnection = false;
+        bool isOutConnecton = false;
+        bool isConnected = false;
+
+        foreach (GameObject fromObject in Pool.Values)
         {
-            Debug.DrawLine(item.transform.position, position, Color.yellow);
+            //Checks if fromObject can make a connection
+            foreach (int identifier in (toObject.GetComponent<Structure>().Data.ins))
+            {
+                if (identifier == fromObject.GetComponent<Structure>().Data.identifier)
+                {
+                    //fromObject can make a connection in
+                    if (inRange(toObject.transform.position, fromObject.transform.position, fromObject.GetComponent<Structure>().Data.range))
+                    {
+                        Debug.DrawLine(fromObject.transform.position, toObject.transform.position, Color.cyan);
+                    }
+                }
+            }
+        }
+    }
+
+    private bool inRange(Vector3 toPosition, Vector3 fromPosition, int range)
+    {
+        float newRange = range / 2;
+        float result = Vector2.Distance(new Vector2(toPosition.x, toPosition.y), new Vector2(fromPosition.x, fromPosition.y));
+        result -= 1.28f;
+        if (result <= newRange)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

@@ -102,7 +102,9 @@ public class LDSUIManager : MonoBehaviour
             ypos += 40;
             GUI.Label(new Rect(xpos, ypos, 200, 20), "Current Structure", style);
             ypos += 25;
-            GUI.Label(new Rect(xpos, ypos, 200, 20), string.Concat("Type: ", this.currentObject.Data.name), style);
+            GUI.Label(new Rect(xpos, ypos, 200, 20), string.Concat("Identifier: ", this.currentObject.Data.identifier), style);
+            ypos += 25;
+            GUI.Label(new Rect(xpos, ypos, 200, 20), string.Concat("Price: ", this.currentObject.Data.price), style);
             ypos += 25;
             GUI.Label(new Rect(xpos, ypos, 200, 20), string.Concat("Name: ", this.currentObject.name), style);
             ypos += 25;
@@ -113,6 +115,28 @@ public class LDSUIManager : MonoBehaviour
             GUI.Label(new Rect(xpos, ypos, 200, 20), string.Concat("Armor: ", this.currentObject.Data.armor), style);
             ypos += 25;
             GUI.Label(new Rect(xpos, ypos, 200, 20), string.Concat("Damage: ", this.currentObject.Data.damage), style);
+
+
+            string text = "";
+            foreach (int item in this.currentObject.Data.ins)
+            {
+                text += item;
+                text += ", ";
+            }
+
+            ypos += 25;
+            GUI.Label(new Rect(xpos, ypos, 200, 20), string.Concat("ins: ", text), style);
+
+            text = "";
+            foreach (int item in this.currentObject.Data.outs)
+            {
+                text += item;
+                text += ", ";
+            }
+
+            ypos += 25;
+            GUI.Label(new Rect(xpos, ypos, 200, 20), string.Concat("outs: ", text), style);
+
             ypos += 25;
             GUI.Label(new Rect(xpos, ypos, 200, 20), string.Concat("Energy Usage: ", this.currentObject.Data.energyUsage), style);
 

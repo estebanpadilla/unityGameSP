@@ -2,6 +2,7 @@
 public class LDSData
 {
     /*Variable for regular structures.*/
+    public int identifier;
     public string name;
     public int price;
     public float priceLost;
@@ -37,6 +38,11 @@ public class LDSData
     public int repairMaterialCost;
     public int repairTime;
     public int repairDamageRatio;
+
+    //Connections
+    public int[] ins;
+    public int[] outs;
+
     public string[] descriptions;
     public string[] pros;
     public string[] cons;
