@@ -1,36 +1,48 @@
 using UnityEngine;
-using System.Collections;
 
 public class CameraMovement : MonoBehaviour
 {
-    public float dampTime = 0.15f;
-    private Vector3 velocity = Vector3.zero;
-    private Transform target;
+    private Vector3 resetCamera;
+    private Vector3 origin;
+    private Vector3 diference;
+    private bool drag = false;
 
-    // Use this for initialization
+    private GameManager gameManager;
+
     void Start()
     {
-        this.target = GameObject.Find("gameManager").transform;
+        resetCamera = Camera.main.transform.position;
+        gameManager = GameObject.FindWithTag("gameManager").GetComponent<GameManager>();
     }
-
-    // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        Vector3 point = GetComponent<Camera>().WorldToViewportPoint(target.position);
+        if (gameManager.disableCameraMove)
+        {
+            return;
+        }
 
-        float cameraMovementX = 0.5f;
-        float cameraMovementY = 0.5f;
-
-        // if ((target.position.x - 3f) < 0) {
-        // 	cameraMovementX = point.x;
-        // }
-
-        // if ((target.position.y - 2.8f) < 0) {
-        // 	cameraMovementY = point.y;
-        // }
-
-        Vector3 delta = target.position - GetComponent<Camera>().ViewportToWorldPoint(new Vector3(cameraMovementX, cameraMovementY, point.z));
-        Vector3 destination = transform.position + delta;
-        this.transform.position = Vector3.SmoothDamp(this.transform.position, destination, ref velocity, dampTime);
+        if (Input.GetMouseButton(0))
+        {
+            diference = (Camera.main.ScreenToWorldPoint(Input.mousePosition)) - Camera.main.transform.position;
+            if (drag == false)
+            {
+                drag = true;
+                origin = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            }
+        }
+        else
+        {
+            drag = false;
+        }
+        if (drag == true)
+        {
+            Camera.main.transform.position = origin - diference;
+        }
+        //RESET CAMERA TO STARTING POSITION WITH RIGHT CLICK
+        if (Input.GetMouseButton(1))
+        {
+            Camera.main.transform.position = resetCamera;
+        }
     }
+
 }

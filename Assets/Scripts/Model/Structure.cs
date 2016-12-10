@@ -7,15 +7,17 @@ public class Structure : MonoBehaviour
     public GameObject structureRange;
 
     //Instance Variables
-    protected LDSGameManager gameManager;
-    public LDSGameManager GameManager { get { return this.gameManager; } set { this.gameManager = value; } }
+    protected GameManager gameManager;
+    public GameManager GameManager { get { return this.gameManager; } set { this.gameManager = value; } }
 
-    protected LDSData data;
-    public LDSData Data { set { this.data = value; } get { return this.data; } }
+    protected GameObjectData data;
+    public GameObjectData Data { set { this.data = value; } get { return this.data; } }
 
     protected List<string> upGradeKeys;
     protected GameObject range;
+
     protected bool isPlaced = false;
+    protected bool isAlwaysDragable = false;
 
     //Connection objects
     protected GameObject[] ins;
@@ -25,6 +27,8 @@ public class Structure : MonoBehaviour
 
     void OnMouseUp()
     {
+        gameManager.disableCameraMove = false;
+
         if (!isPlaced)
         {
             isPlaced = true;
@@ -38,17 +42,21 @@ public class Structure : MonoBehaviour
     /// </summary>
     void OnMouseDown()
     {
+        gameManager.disableCameraMove = true;
         this.gameManager.setCurrentObjectToDisplay(this);
     }
 
     void OnMouseDrag()
     {
-        if (!isPlaced)
+        if (!isPlaced || isAlwaysDragable)
         {
             Vector3 point = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().ScreenToWorldPoint(Input.mousePosition);
             point.z = gameObject.transform.position.z;
             gameObject.transform.position = point;
-            range.transform.position = point;
+            if (range)
+            {
+                range.transform.position = point;
+            }
             gameManager.findConnections(gameObject);
         }
     }

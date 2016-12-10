@@ -1,5 +1,5 @@
 ﻿[System.Serializable]
-public class LDSData
+public class GameObjectData
 {
     /*Variable for regular structures.*/
     public int identifier;

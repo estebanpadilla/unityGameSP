@@ -1,5 +1,5 @@
 {
-  "ldsGameObjectsData": [
+  "data": [
     {
       "identifier": 1,
       "name": "stronghold",
@@ -19,7 +19,7 @@
       "efficiency": 0,
       "deficiency": 0,
       "productionQty": 0,
-      "storageCty": 0,
+      "storageCty": 2000,
       "repaireCost": 0,
       "repairEnergyCost": 3,
       "repairMaterialCost": 10,
@@ -523,9 +523,11 @@
       "repairDamageRatio": 5,
       "ins": [
         2,
-        3
+        3,
+        4
       ],
       "outs": [
+        4,
         5,
         6
       ],
@@ -562,9 +564,11 @@
       "repairDamageRatio": 5,
       "ins": [
         2,
-        3
+        3,
+        4
       ],
       "outs": [
+        4,
         5,
         6
       ],
@@ -601,9 +605,11 @@
       "repairDamageRatio": 5,
       "ins": [
         2,
-        3
+        3,
+        4
       ],
       "outs": [
+        4,
         5,
         6
       ],
@@ -640,9 +646,11 @@
       "repairDamageRatio": 5,
       "ins": [
         2,
-        3
+        3,
+        4
       ],
       "outs": [
+        4,
         5,
         6
       ],
@@ -962,7 +970,7 @@
       "cons": []
     },
     {
-      "identifier": 6,
+      "identifier": 21,
       "name": "repairDrome1",
       "price": 200,
       "priceLost": 0,
@@ -1000,7 +1008,7 @@
       "cons": []
     },
     {
-      "identifier": 6,
+      "identifier": 21,
       "name": "repairDrome2",
       "price": 100,
       "priceLost": 0,
@@ -1038,7 +1046,7 @@
       "cons": []
     },
     {
-      "identifier": 6,
+      "identifier": 21,
       "name": "repairDrome3",
       "price": 100,
       "priceLost": 0,
@@ -1077,7 +1085,7 @@
     },
     {
       "identifier": 7,
-      "name": "materialStorage",
+      "name": "materialStorage1",
       "price": 200,
       "priceLost": 0.5,
       "health": 100,
@@ -1113,7 +1121,7 @@
       "cons": []
     },
     {
-      "identifier": 0,
+      "identifier": 20,
       "name": "asteroid1",
       "price": 0,
       "priceLost": 0,
@@ -1130,7 +1138,7 @@
       "workRate": 0,
       "efficiency": 0,
       "deficiency": 0,
-      "productionQty": 0,
+      "productionQty": 300,
       "storageCty": 300,
       "repaireCost": 0,
       "repairEnergyCost": 0,
@@ -1169,7 +1177,7 @@
       "workRate": 0,
       "efficiency": 0,
       "deficiency": 0,
-      "productionQty": 0,
+      "productionQty": 600,
       "storageCty": 600,
       "repaireCost": 0,
       "repairEnergyCost": 0,
@@ -1204,7 +1212,7 @@
       "workRate": 0,
       "efficiency": 0,
       "deficiency": 0,
-      "productionQty": 0,
+      "productionQty": 1000,
       "storageCty": 1000,
       "repaireCost": 0,
       "repairEnergyCost": 0,
@@ -1239,7 +1247,7 @@
       "workRate": 0,
       "efficiency": 0,
       "deficiency": 0,
-      "productionQty": 0,
+      "productionQty": 1500,
       "storageCty": 1500,
       "repaireCost": 0,
       "repairEnergyCost": 0,
@@ -1274,7 +1282,7 @@
       "workRate": 0,
       "efficiency": 0,
       "deficiency": 0,
-      "productionQty": 0,
+      "productionQty": 2000,
       "storageCty": 2000,
       "repaireCost": 0,
       "repairEnergyCost": 0,

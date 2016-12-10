@@ -1,19 +1,7 @@
-﻿using UnityEngine;
-
-public class Asteroid : MonoBehaviour
+﻿public class Asteroid : Structure
 {
-
-    private LDSData data;
-
-    // Use this for initialization
     void Start()
     {
-        //Get LDSData from dataManager.	
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        isAlwaysDragable = true;
     }
 }
