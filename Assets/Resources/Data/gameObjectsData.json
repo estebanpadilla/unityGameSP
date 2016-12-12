@@ -26,10 +26,11 @@
       "repairTime": 4,
       "repairDamageRatio": 10,
       "ins": [
-        0
+        2,
+        4
       ],
       "outs": [
-        0
+        7
       ],
       "description": [
         "This is the building you start with.",
@@ -62,12 +63,12 @@
       "upgradeId": "solarStation2",
       "upgradePrice": 200,
       "creationTime": 5,
-      "workTime": 5,
+      "workTime": 2,
       "workRate": 2,
       "efficiency": 1,
       "deficiency": 0,
       "productionQty": 0,
-      "storageCty": 0,
+      "storageCty": 50,
       "repaireCost": 0,
       "repairEnergyCost": 5,
       "repairMaterialCost": 8,
@@ -110,12 +111,12 @@
       "upgradeId": "solarStation3",
       "upgradePrice": 250,
       "creationTime": 4,
-      "workTime": 5,
+      "workTime": 2,
       "workRate": 4,
       "efficiency": 0.3,
       "deficiency": 1,
       "productionQty": 0,
-      "storageCty": 0,
+      "storageCty": 75,
       "repaireCost": 0,
       "repairEnergyCost": 5,
       "repairMaterialCost": 8,
@@ -155,12 +156,12 @@
       "upgradeId": "solarStation4",
       "upgradePrice": 300,
       "creationTime": 3,
-      "workTime": 5,
+      "workTime": 2,
       "workRate": 6,
       "efficiency": 0.4,
       "deficiency": 1,
       "productionQty": 0,
-      "storageCty": 0,
+      "storageCty": 100,
       "repaireCost": 0,
       "repairEnergyCost": 5,
       "repairMaterialCost": 8,
@@ -200,12 +201,12 @@
       "upgradeId": "solarStation5",
       "upgradePrice": 350,
       "creationTime": 3,
-      "workTime": 5,
+      "workTime": 2,
       "workRate": 8,
       "efficiency": 0.4,
       "deficiency": 1,
       "productionQty": 0,
-      "storageCty": 0,
+      "storageCty": 125,
       "repaireCost": 0,
       "repairEnergyCost": 5,
       "repairMaterialCost": 8,
@@ -245,12 +246,12 @@
       "upgradeId": "none",
       "upgradePrice": 0,
       "creationTime": 3,
-      "workTime": 5,
+      "workTime": 2,
       "workRate": 10,
       "efficiency": 0.8,
       "deficiency": 1,
       "productionQty": 0,
-      "storageCty": 0,
+      "storageCty": 150,
       "repaireCost": 0,
       "repairEnergyCost": 5,
       "repairMaterialCost": 8,
@@ -305,10 +306,7 @@
         2
       ],
       "outs": [
-        1,
-        4,
-        5,
-        6
+        0
       ],
       "description": [
         "Once a energy station has a battery attachted it will store all energy is not requeted for further usege.\nHolds any spare energy produced by solar or gas station, this is very handy for when you are under attack and need high levels of energy."
@@ -349,10 +347,7 @@
         2
       ],
       "outs": [
-        1,
-        4,
-        5,
-        6
+        0
       ],
       "description": [
         "Increase storage capacity.\nArmor improvement."
@@ -393,10 +388,7 @@
         2
       ],
       "outs": [
-        1,
-        4,
-        5,
-        6
+        0
       ],
       "description": [
         "Increase storage capacity.\nArmor improvement."
@@ -437,10 +429,7 @@
         2
       ],
       "outs": [
-        1,
-        4,
-        5,
-        6
+        0
       ],
       "description": [
         "Increase storage capacity.\nArmor improvement."
@@ -481,10 +470,7 @@
         2
       ],
       "outs": [
-        1,
-        4,
-        5,
-        6
+        0
       ],
       "description": [
         "Increase storage capacity.\nArmor improvement."
@@ -970,6 +956,222 @@
       "cons": []
     },
     {
+      "identifier": 7,
+      "name": "materialStorage1",
+      "price": 200,
+      "priceLost": 0.5,
+      "health": 100,
+      "damage": 0,
+      "armor": 0,
+      "range": 4,
+      "energyUsage": 0,
+      "currentLevel": 1,
+      "upgradeId": "none",
+      "upgradePrice": 0,
+      "creationTime": 4,
+      "workTime": 0,
+      "workRate": 0,
+      "efficiency": 0,
+      "deficiency": 0,
+      "productionQty": 0,
+      "storageCty": 2000,
+      "repaireCost": 0,
+      "repairEnergyCost": 5,
+      "repairMaterialCost": 5,
+      "repairTime": 5,
+      "repairDamageRatio": 4,
+      "ins": [
+        0
+      ],
+      "outs": [
+        0
+      ],
+      "description": [
+        "Once you reach the storage capacity on your build you will need to build a storage unit."
+      ],
+      "pros": [],
+      "cons": []
+    },
+    {
+      "identifier": 8,
+      "name": "asteroid1",
+      "price": 0,
+      "priceLost": 0,
+      "health": 0,
+      "damage": 0,
+      "armor": 0,
+      "range": 0,
+      "energyUsage": 0,
+      "currentLevel": 1,
+      "upgradeId": "asteroid2",
+      "upgradePrice": 0,
+      "creationTime": 0,
+      "workTime": 0,
+      "workRate": 0,
+      "efficiency": 0,
+      "deficiency": 0,
+      "productionQty": 300,
+      "storageCty": 300,
+      "repaireCost": 0,
+      "repairEnergyCost": 0,
+      "repairMaterialCost": 0,
+      "repairTime": 0,
+      "repairDamageRatio": 0,
+      "ins": [
+        0
+      ],
+      "outs": [
+        0
+      ],
+      "description": [
+        "At the bottom of the screen there is information about the status of the asteroid, meterial left, type of asteroid. Once all resources on the asteroid are mine the asteroid is dead.",
+        "There are diferrent sizes of asteroids with different quantity of material and different material. Some asteroid have material with a higer value.",
+        "Structure floating on space that contains special materials that can be mine."
+      ],
+      "pros": [],
+      "cons": []
+    },
+    {
+      "identifier": 8,
+      "name": "asteroid2",
+      "price": 0,
+      "priceLost": 0,
+      "health": 0,
+      "damage": 0,
+      "armor": 0,
+      "range": 0,
+      "energyUsage": 0,
+      "currentLevel": 2,
+      "upgradeId": "asteroid3",
+      "upgradePrice": 0,
+      "creationTime": 0,
+      "workTime": 0,
+      "workRate": 0,
+      "efficiency": 0,
+      "deficiency": 0,
+      "productionQty": 600,
+      "storageCty": 600,
+      "repaireCost": 0,
+      "repairEnergyCost": 0,
+      "repairMaterialCost": 0,
+      "repairTime": 0,
+      "repairDamageRatio": 0,
+      "ins": [
+        0
+      ],
+      "outs": [
+        0
+      ],
+      "description": [],
+      "pros": [],
+      "cons": []
+    },
+    {
+      "identifier": 8,
+      "name": "asteroid3",
+      "price": 0,
+      "priceLost": 0,
+      "health": 0,
+      "damage": 0,
+      "armor": 0,
+      "range": 0,
+      "energyUsage": 0,
+      "currentLevel": 3,
+      "upgradeId": "asteroid4",
+      "upgradePrice": 0,
+      "creationTime": 0,
+      "workTime": 0,
+      "workRate": 0,
+      "efficiency": 0,
+      "deficiency": 0,
+      "productionQty": 1000,
+      "storageCty": 1000,
+      "repaireCost": 0,
+      "repairEnergyCost": 0,
+      "repairMaterialCost": 0,
+      "repairTime": 0,
+      "repairDamageRatio": 0,
+      "ins": [
+        0
+      ],
+      "outs": [
+        0
+      ],
+      "description": [],
+      "pros": [],
+      "cons": []
+    },
+    {
+      "identifier": 8,
+      "name": "asteroid4",
+      "price": 0,
+      "priceLost": 0,
+      "health": 0,
+      "damage": 0,
+      "armor": 0,
+      "range": 0,
+      "energyUsage": 0,
+      "currentLevel": 4,
+      "upgradeId": "asteroid5",
+      "upgradePrice": 0,
+      "creationTime": 0,
+      "workTime": 0,
+      "workRate": 0,
+      "efficiency": 0,
+      "deficiency": 0,
+      "productionQty": 1500,
+      "storageCty": 1500,
+      "repaireCost": 0,
+      "repairEnergyCost": 0,
+      "repairMaterialCost": 0,
+      "repairTime": 0,
+      "repairDamageRatio": 0,
+      "ins": [
+        0
+      ],
+      "outs": [
+        0
+      ],
+      "description": [],
+      "pros": [],
+      "cons": []
+    },
+    {
+      "identifier": 8,
+      "name": "asteroid5",
+      "price": 0,
+      "priceLost": 0,
+      "health": 0,
+      "damage": 0,
+      "armor": 0,
+      "range": 0,
+      "energyUsage": 0,
+      "currentLevel": 5,
+      "upgradeId": "none",
+      "upgradePrice": 0,
+      "creationTime": 0,
+      "workTime": 0,
+      "workRate": 0,
+      "efficiency": 0,
+      "deficiency": 0,
+      "productionQty": 2000,
+      "storageCty": 2000,
+      "repaireCost": 0,
+      "repairEnergyCost": 0,
+      "repairMaterialCost": 0,
+      "repairTime": 0,
+      "repairDamageRatio": 0,
+      "ins": [
+        0
+      ],
+      "outs": [
+        0
+      ],
+      "description": [],
+      "pros": [],
+      "cons": []
+    },
+    {
       "identifier": 21,
       "name": "repairDrome1",
       "price": 200,
@@ -1080,222 +1282,6 @@
         "Add armor.",
         "Increase repair speed."
       ],
-      "pros": [],
-      "cons": []
-    },
-    {
-      "identifier": 7,
-      "name": "materialStorage1",
-      "price": 200,
-      "priceLost": 0.5,
-      "health": 100,
-      "damage": 0,
-      "armor": 0,
-      "range": 4,
-      "energyUsage": 0,
-      "currentLevel": 1,
-      "upgradeId": "none",
-      "upgradePrice": 0,
-      "creationTime": 4,
-      "workTime": 0,
-      "workRate": 0,
-      "efficiency": 0,
-      "deficiency": 0,
-      "productionQty": 0,
-      "storageCty": 2000,
-      "repaireCost": 0,
-      "repairEnergyCost": 5,
-      "repairMaterialCost": 5,
-      "repairTime": 5,
-      "repairDamageRatio": 4,
-      "ins": [
-        0
-      ],
-      "outs": [
-        0
-      ],
-      "description": [
-        "Once you reach the storage capacity on your build you will need to build a storage unit."
-      ],
-      "pros": [],
-      "cons": []
-    },
-    {
-      "identifier": 20,
-      "name": "asteroid1",
-      "price": 0,
-      "priceLost": 0,
-      "health": 0,
-      "damage": 0,
-      "armor": 0,
-      "range": 0,
-      "energyUsage": 0,
-      "currentLevel": 1,
-      "upgradeId": "asteroid2",
-      "upgradePrice": 0,
-      "creationTime": 0,
-      "workTime": 0,
-      "workRate": 0,
-      "efficiency": 0,
-      "deficiency": 0,
-      "productionQty": 300,
-      "storageCty": 300,
-      "repaireCost": 0,
-      "repairEnergyCost": 0,
-      "repairMaterialCost": 0,
-      "repairTime": 0,
-      "repairDamageRatio": 0,
-      "ins": [
-        0
-      ],
-      "outs": [
-        0
-      ],
-      "description": [
-        "At the bottom of the screen there is information about the status of the asteroid, meterial left, type of asteroid. Once all resources on the asteroid are mine the asteroid is dead.",
-        "There are diferrent sizes of asteroids with different quantity of material and different material. Some asteroid have material with a higer value.",
-        "Structure floating on space that contains special materials that can be mine."
-      ],
-      "pros": [],
-      "cons": []
-    },
-    {
-      "identifier": 20,
-      "name": "asteroid2",
-      "price": 0,
-      "priceLost": 0,
-      "health": 0,
-      "damage": 0,
-      "armor": 0,
-      "range": 0,
-      "energyUsage": 0,
-      "currentLevel": 2,
-      "upgradeId": "asteroid3",
-      "upgradePrice": 0,
-      "creationTime": 0,
-      "workTime": 0,
-      "workRate": 0,
-      "efficiency": 0,
-      "deficiency": 0,
-      "productionQty": 600,
-      "storageCty": 600,
-      "repaireCost": 0,
-      "repairEnergyCost": 0,
-      "repairMaterialCost": 0,
-      "repairTime": 0,
-      "repairDamageRatio": 0,
-      "ins": [
-        0
-      ],
-      "outs": [
-        0
-      ],
-      "description": [],
-      "pros": [],
-      "cons": []
-    },
-    {
-      "identifier": 20,
-      "name": "asteroid3",
-      "price": 0,
-      "priceLost": 0,
-      "health": 0,
-      "damage": 0,
-      "armor": 0,
-      "range": 0,
-      "energyUsage": 0,
-      "currentLevel": 3,
-      "upgradeId": "asteroid4",
-      "upgradePrice": 0,
-      "creationTime": 0,
-      "workTime": 0,
-      "workRate": 0,
-      "efficiency": 0,
-      "deficiency": 0,
-      "productionQty": 1000,
-      "storageCty": 1000,
-      "repaireCost": 0,
-      "repairEnergyCost": 0,
-      "repairMaterialCost": 0,
-      "repairTime": 0,
-      "repairDamageRatio": 0,
-      "ins": [
-        0
-      ],
-      "outs": [
-        0
-      ],
-      "description": [],
-      "pros": [],
-      "cons": []
-    },
-    {
-      "identifier": 20,
-      "name": "asteroid4",
-      "price": 0,
-      "priceLost": 0,
-      "health": 0,
-      "damage": 0,
-      "armor": 0,
-      "range": 0,
-      "energyUsage": 0,
-      "currentLevel": 4,
-      "upgradeId": "asteroid5",
-      "upgradePrice": 0,
-      "creationTime": 0,
-      "workTime": 0,
-      "workRate": 0,
-      "efficiency": 0,
-      "deficiency": 0,
-      "productionQty": 1500,
-      "storageCty": 1500,
-      "repaireCost": 0,
-      "repairEnergyCost": 0,
-      "repairMaterialCost": 0,
-      "repairTime": 0,
-      "repairDamageRatio": 0,
-      "ins": [
-        0
-      ],
-      "outs": [
-        0
-      ],
-      "description": [],
-      "pros": [],
-      "cons": []
-    },
-    {
-      "identifier": 20,
-      "name": "asteroid5",
-      "price": 0,
-      "priceLost": 0,
-      "health": 0,
-      "damage": 0,
-      "armor": 0,
-      "range": 0,
-      "energyUsage": 0,
-      "currentLevel": 5,
-      "upgradeId": "none",
-      "upgradePrice": 0,
-      "creationTime": 0,
-      "workTime": 0,
-      "workRate": 0,
-      "efficiency": 0,
-      "deficiency": 0,
-      "productionQty": 2000,
-      "storageCty": 2000,
-      "repaireCost": 0,
-      "repairEnergyCost": 0,
-      "repairMaterialCost": 0,
-      "repairTime": 0,
-      "repairDamageRatio": 0,
-      "ins": [
-        0
-      ],
-      "outs": [
-        0
-      ],
-      "description": [],
       "pros": [],
       "cons": []
     }

@@ -40,6 +40,7 @@ public class DataManager
     {
         string json = JsonHelper.ToJson(new List<GameLevelData>(this.gameLevelsData.Values));
         string path = Application.dataPath + "/Resources/Data/gameLevelsData.json";
+
         Debug.Log("Save levels data to:" + path);
         File.WriteAllText(path, json);
 #if UNITY_EDITOR

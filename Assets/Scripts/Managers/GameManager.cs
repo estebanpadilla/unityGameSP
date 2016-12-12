@@ -233,34 +233,66 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void findConnections(GameObject toObject)
+
+    //Object energy connection methods
+    public void findConnections(GameObject requesterGO)
     {
         // bool isInConnection = false;
         // bool isOutConnecton = false;
         // bool isConnected = false;
 
-        foreach (GameObject fromObject in Pool.Values)
+        Structure requester = requesterGO.GetComponent<Structure>();
+
+        foreach (GameObject poolGO in Pool.Values)
         {
             //Checks if fromObject can make a connection
-            foreach (int identifier in (toObject.GetComponent<Structure>().Data.ins))
+            Structure sender = poolGO.GetComponent<Structure>();
+
+            //to use when the requester object is an energy station.
+            if (requester.Data.identifier == 2)
             {
-                if (identifier == fromObject.GetComponent<Structure>().Data.identifier)
+                foreach (int identifier in requester.Data.outs)
                 {
-                    //fromObject can make a connection in
-                    if (inRange(toObject.transform.position, fromObject.transform.position, fromObject.GetComponent<Structure>().Data.range))
+                    if (identifier == sender.Data.identifier)
                     {
-                        Debug.DrawLine(fromObject.transform.position, toObject.transform.position, Color.cyan);
+                        if (isWithinRange(requesterGO.transform.position, poolGO.transform.position, sender.Data.range))
+                        {
+                            Debug.DrawLine(poolGO.transform.position, requesterGO.transform.position, Color.cyan);
+                            sender.addEnergySource(requesterGO);
+                        }
+                        else
+                        {
+                            sender.removeEnergySource(poolGO);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (int identifier in requester.Data.ins)
+                {
+                    if (identifier == sender.Data.identifier)
+                    {
+                        if (isWithinRange(requesterGO.transform.position, poolGO.transform.position, sender.Data.range))
+                        {
+                            Debug.DrawLine(poolGO.transform.position, requesterGO.transform.position, Color.cyan);
+                            requester.addEnergySource(poolGO);
+                        }
+                        else
+                        {
+                            requester.removeEnergySource(poolGO);
+                        }
                     }
                 }
             }
         }
     }
 
-    private bool inRange(Vector3 toPosition, Vector3 fromPosition, int range)
+    private bool isWithinRange(Vector3 toPosition, Vector3 fromPosition, int range)
     {
         float newRange = range / 2;
         float result = Vector2.Distance(new Vector2(toPosition.x, toPosition.y), new Vector2(fromPosition.x, fromPosition.y));
-        result -= 1.28f;
+        result -= 1.28f;//reduce some distance to compensate the size of the object.
         if (result <= newRange)
         {
             return true;
@@ -271,13 +303,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Level data methods
     public void saveLevelData()
     {
         List<AsteroidLevelData> asteroidsList = new List<AsteroidLevelData>();
         foreach (GameObject item in pool.Values)
         {
             GameObjectData objectData = item.GetComponent<Structure>().Data;
-            if (objectData.identifier == 20)
+            if (objectData.identifier == 8)
             {
                 asteroidsList.Add(new AsteroidLevelData(objectData.name, item.transform.position));
             }

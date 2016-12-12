@@ -34,15 +34,36 @@ public class CameraMovement : MonoBehaviour
         {
             drag = false;
         }
+
         if (drag == true)
         {
             Camera.main.transform.position = origin - diference;
         }
+
         //RESET CAMERA TO STARTING POSITION WITH RIGHT CLICK
         if (Input.GetMouseButton(1))
         {
             Camera.main.transform.position = resetCamera;
         }
-    }
 
+
+
+        float d = Input.GetAxis("Mouse ScrollWheel");
+        if (d > 0f)
+        {
+            if (Camera.main.orthographicSize <= 25)
+            {
+                // scroll up
+                Camera.main.orthographicSize = Camera.main.orthographicSize + 10 * Time.deltaTime;
+            }
+        }
+        else if (d < 0f)
+        {
+            if (Camera.main.orthographicSize >= 5)
+            {
+                // scroll down
+                Camera.main.orthographicSize = Camera.main.orthographicSize - 10 * Time.deltaTime;
+            }
+        }
+    }
 }

@@ -4,9 +4,18 @@ class Miner : Structure
 
     void Start()
     {
-        this.range = Instantiate(structureRange, transform.position, Quaternion.identity);
-        range.transform.localScale += new Vector3(data.range, data.range, 0);
-        range.transform.parent = gameObject.transform;
+        addRangeGameObject();
         gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
+    }
+
+    /// <summary>
+    /// OnMouseUpAsButton is only called when the mouse is released over
+    /// the same GUIElement or Collider as it was pressed.
+    /// </summary>
+    void OnMouseUpAsButton()
+    {
+        Debug.Log("request energy");
+        int energy = this.requestEnergey(Data.energyUsage);
+        Debug.Log(energy);
     }
 }
