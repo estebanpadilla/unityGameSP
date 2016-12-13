@@ -31,7 +31,6 @@ class SolarStation : Structure
             }
             else
             {
-                Debug.Log("send produce energy to store.");
                 isWorking = false;
             }
         }

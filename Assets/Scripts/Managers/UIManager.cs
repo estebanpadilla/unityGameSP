@@ -202,7 +202,6 @@ public class UIManager : MonoBehaviour
 
             if (data.identifier == 5)
             {
-                Debug.Log(item.name);
                 Vector3 point = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().WorldToScreenPoint(item.transform.position);
                 point.y = (720 - point.y);
                 GUI.Label(new Rect(point.x, point.y, 20, 100), ("minerals:" + data.productionQty), debugStyle);
