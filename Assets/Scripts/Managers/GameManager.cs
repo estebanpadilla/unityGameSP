@@ -132,7 +132,7 @@ public class GameManager : MonoBehaviour
     private void createObject(string value, Vector3 position, bool doPriceCheck)
     {
 
-        GameObjectData data = dataManager.findGameObjectData(value);
+        GameObjectData data = dataManager.findGameObjectData(value).Clone();
 
         bool canPlayerPurchaseObject = false;
 

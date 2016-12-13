@@ -11,16 +11,19 @@ public class Structure : MonoBehaviour
     protected GameObjectData data;
     protected Dictionary<string, GameObject> energySources = new Dictionary<string, GameObject>();
     protected bool isRequestingEnergy = false;
+    public bool isWorking = false;
     protected bool isAlwaysDragable = false;
 
     protected GameObject range;
     private bool isPlaced = false;
+    protected float counter = 0.0f;
 
     //Properties
     public GameManager GameManager { get { return this.gameManager; } set { this.gameManager = value; } }
     public GameObjectData Data { set { this.data = value; } get { return this.data; } }
     public Dictionary<string, GameObject> EnergySources { get { return this.energySources; } set { this.energySources = value; } }
     public bool IsRequestingEnergy { get { return this.isRequestingEnergy; } set { this.isRequestingEnergy = value; } }
+    public bool IsWorking { get { return this.isWorking; } set { this.isWorking = value; } }
     public bool IsAlwaysDragable { get { return this.isAlwaysDragable; } set { this.isAlwaysDragable = value; } }
 
     //For debugging
@@ -112,11 +115,11 @@ public class Structure : MonoBehaviour
         }
     }
 
-    public int requestEnergey(int requestedEnergy)
+    public int requestEnergy(int requestedEnergy)
     {
         if (data.identifier == 2)
         {
-            return requestedEnergy;
+            return sendEnergy(requestedEnergy);
         }
         else if (energySources.Count == 0)
         {
@@ -127,10 +130,15 @@ public class Structure : MonoBehaviour
             foreach (GameObject item in energySources.Values)
             {
                 Debug.Log(("requesting energy from:" + item.name));
-                return item.GetComponent<Structure>().requestEnergey(requestedEnergy);
+                return item.GetComponent<Structure>().requestEnergy(requestedEnergy);
             }
         }
 
+        return 0;
+    }
+
+    public virtual int sendEnergy(int requestedEnergy)
+    {
         return 0;
     }
 
@@ -163,6 +171,7 @@ public class Structure : MonoBehaviour
 
     public void hideEnergySourceTree()
     {
+
         isShowEnergysourceTree = false;
         gameObject.GetComponent<SpriteRenderer>().color = Color.white;
 

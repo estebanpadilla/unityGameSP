@@ -19,8 +19,8 @@ public class GameObjectData
     /*Variables use on structes that do some type of work.*/
     public int workTime;
     public int workRate;
-    public int efficiency;
-    public int deficiency;
+    public float efficiency;
+    public float deficiency;
 
     /* Variable use on structres that create or produce something like, 
 	* solarStation would use to represent the energy produce and the 
@@ -46,5 +46,44 @@ public class GameObjectData
     public string[] descriptions;
     public string[] pros;
     public string[] cons;
+
+
+
+    public GameObjectData Clone()
+    {
+        GameObjectData gameObjectData = new GameObjectData();
+        gameObjectData.identifier = this.identifier;
+        gameObjectData.name = this.name;
+        gameObjectData.price = this.price;
+        gameObjectData.priceLost = this.priceLost;
+        gameObjectData.health = this.health;
+        gameObjectData.damage = this.damage;
+        gameObjectData.armor = this.armor;
+        gameObjectData.currentLevel = this.currentLevel;
+        gameObjectData.upgradeId = this.upgradeId;
+        gameObjectData.upgradePrice = this.upgradePrice;
+        gameObjectData.range = this.range;
+        gameObjectData.energyUsage = this.energyUsage;
+        gameObjectData.creationTime = this.creationTime;
+        gameObjectData.workTime = this.workTime;
+        gameObjectData.workRate = this.workRate;
+        gameObjectData.efficiency = this.efficiency;
+        gameObjectData.deficiency = this.deficiency;
+        gameObjectData.productionQty = this.productionQty;
+        gameObjectData.storageCty = this.storageCty;
+        gameObjectData.repairCost = this.repairCost;
+        gameObjectData.repairEnergyCost = this.repairEnergyCost;
+        gameObjectData.repairMaterialCost = this.repairMaterialCost;
+        gameObjectData.repairTime = this.repairTime;
+        gameObjectData.repairDamageRatio = this.repairDamageRatio;
+        gameObjectData.ins = this.ins;
+        gameObjectData.outs = this.outs;
+        gameObjectData.descriptions = this.descriptions;
+        gameObjectData.pros = this.pros;
+        gameObjectData.cons = this.cons;
+
+        return gameObjectData;
+    }
 }
+
 

@@ -200,11 +200,20 @@ public class UIManager : MonoBehaviour
 
             GameObjectData data = item.GetComponent<Structure>().Data;
 
-            if (data.identifier == 20)
+            if (data.identifier == 5)
             {
+                Debug.Log(item.name);
                 Vector3 point = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().WorldToScreenPoint(item.transform.position);
                 point.y = (720 - point.y);
                 GUI.Label(new Rect(point.x, point.y, 20, 100), ("minerals:" + data.productionQty), debugStyle);
+            }
+
+            //Show solar station energy level
+            if (data.identifier == 2)
+            {
+                Vector3 point = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().WorldToScreenPoint(item.transform.position);
+                point.y = (720 - point.y);
+                GUI.Label(new Rect(point.x, point.y, 20, 100), ("Energy:" + data.productionQty), debugStyle);
             }
         }
     }
