@@ -1,8 +1,23 @@
 ﻿[System.Serializable]
+public enum GameObjectType
+{
+    None,
+    Stronghold,
+    SolarStation,
+    EnergyStorage,
+    Relay,
+    Miner,
+    RepairStation,
+    MaterialStorage,
+    Asteroid
+}
+
+[System.Serializable]
 public class GameObjectData
 {
     /*Variable for regular structures.*/
-    public int identifier;
+    public GameObjectType gameObjectType;
+    public GameObjectType identifier;
     public string name;
     public int price;
     public float priceLost;
@@ -17,7 +32,7 @@ public class GameObjectData
     public int creationTime;
 
     /*Variables use on structes that do some type of work.*/
-    public int workTime;
+    public float workTime;
     public int workRate;
     public float efficiency;
     public float deficiency;
@@ -40,8 +55,8 @@ public class GameObjectData
     public int repairDamageRatio;
 
     //Connections
-    public int[] ins;
-    public int[] outs;
+    public GameObjectType[] ins;
+    public GameObjectType[] outs;
 
     public string[] descriptions;
     public string[] pros;
@@ -51,38 +66,39 @@ public class GameObjectData
 
     public GameObjectData Clone()
     {
-        GameObjectData gameObjectData = new GameObjectData();
-        gameObjectData.identifier = this.identifier;
-        gameObjectData.name = this.name;
-        gameObjectData.price = this.price;
-        gameObjectData.priceLost = this.priceLost;
-        gameObjectData.health = this.health;
-        gameObjectData.damage = this.damage;
-        gameObjectData.armor = this.armor;
-        gameObjectData.currentLevel = this.currentLevel;
-        gameObjectData.upgradeId = this.upgradeId;
-        gameObjectData.upgradePrice = this.upgradePrice;
-        gameObjectData.range = this.range;
-        gameObjectData.energyUsage = this.energyUsage;
-        gameObjectData.creationTime = this.creationTime;
-        gameObjectData.workTime = this.workTime;
-        gameObjectData.workRate = this.workRate;
-        gameObjectData.efficiency = this.efficiency;
-        gameObjectData.deficiency = this.deficiency;
-        gameObjectData.productionQty = this.productionQty;
-        gameObjectData.storageCty = this.storageCty;
-        gameObjectData.repairCost = this.repairCost;
-        gameObjectData.repairEnergyCost = this.repairEnergyCost;
-        gameObjectData.repairMaterialCost = this.repairMaterialCost;
-        gameObjectData.repairTime = this.repairTime;
-        gameObjectData.repairDamageRatio = this.repairDamageRatio;
-        gameObjectData.ins = this.ins;
-        gameObjectData.outs = this.outs;
-        gameObjectData.descriptions = this.descriptions;
-        gameObjectData.pros = this.pros;
-        gameObjectData.cons = this.cons;
+        GameObjectData data = new GameObjectData();
+        data.gameObjectType = this.gameObjectType;
+        data.identifier = this.identifier;
+        data.name = this.name;
+        data.price = this.price;
+        data.priceLost = this.priceLost;
+        data.health = this.health;
+        data.damage = this.damage;
+        data.armor = this.armor;
+        data.currentLevel = this.currentLevel;
+        data.upgradeId = this.upgradeId;
+        data.upgradePrice = this.upgradePrice;
+        data.range = this.range;
+        data.energyUsage = this.energyUsage;
+        data.creationTime = this.creationTime;
+        data.workTime = this.workTime;
+        data.workRate = this.workRate;
+        data.efficiency = this.efficiency;
+        data.deficiency = this.deficiency;
+        data.productionQty = this.productionQty;
+        data.storageCty = this.storageCty;
+        data.repairCost = this.repairCost;
+        data.repairEnergyCost = this.repairEnergyCost;
+        data.repairMaterialCost = this.repairMaterialCost;
+        data.repairTime = this.repairTime;
+        data.repairDamageRatio = this.repairDamageRatio;
+        data.ins = this.ins;
+        data.outs = this.outs;
+        data.descriptions = this.descriptions;
+        data.pros = this.pros;
+        data.cons = this.cons;
 
-        return gameObjectData;
+        return data;
     }
 }
 

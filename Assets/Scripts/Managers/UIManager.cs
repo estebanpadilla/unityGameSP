@@ -32,7 +32,7 @@ public class UIManager : MonoBehaviour
         style.normal.textColor = Color.white;
 
         debugStyle = new GUIStyle();
-        debugStyle.fontSize = 12;
+        debugStyle.fontSize = 15;
         debugStyle.normal.textColor = Color.yellow;
 
         buttonStyle = new GUIStyle();
@@ -200,7 +200,7 @@ public class UIManager : MonoBehaviour
 
             GameObjectData data = item.GetComponent<Structure>().Data;
 
-            if (data.identifier == 5)
+            if (data.identifier == GameObjectType.Miner)
             {
                 Vector3 point = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().WorldToScreenPoint(item.transform.position);
                 point.y = (720 - point.y);
@@ -208,7 +208,7 @@ public class UIManager : MonoBehaviour
             }
 
             //Show solar station energy level
-            if (data.identifier == 2)
+            if (data.identifier == GameObjectType.SolarStation)
             {
                 Vector3 point = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().WorldToScreenPoint(item.transform.position);
                 point.y = (720 - point.y);

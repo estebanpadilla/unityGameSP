@@ -29,6 +29,7 @@ class Miner : Structure
             if (counter >= Data.workTime)
             {
                 counter = 0;
+                energy = 0;
                 if (Data.productionQty < Data.storageCty)
                 {
                     Data.productionQty += Data.workRate;
@@ -41,7 +42,7 @@ class Miner : Structure
             }
             else
             {
-                counter += (Time.deltaTime * 3) * Data.efficiency;
+                counter += (Time.deltaTime * Data.efficiency);
             }
         }
         else

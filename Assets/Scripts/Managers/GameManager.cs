@@ -245,13 +245,12 @@ public class GameManager : MonoBehaviour
 
         foreach (GameObject poolGO in Pool.Values)
         {
-            //Checks if fromObject can make a connection
             Structure sender = poolGO.GetComponent<Structure>();
 
             //to use when the requester object is an energy station.
-            if (requester.Data.identifier == 2)
+            if (requester.Data.identifier == GameObjectType.SolarStation)
             {
-                foreach (int identifier in requester.Data.outs)
+                foreach (GameObjectType identifier in requester.Data.outs)
                 {
                     if (identifier == sender.Data.identifier)
                     {
@@ -269,7 +268,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                foreach (int identifier in requester.Data.ins)
+                foreach (GameObjectType identifier in requester.Data.ins)
                 {
                     if (identifier == sender.Data.identifier)
                     {
@@ -310,7 +309,7 @@ public class GameManager : MonoBehaviour
         foreach (GameObject item in pool.Values)
         {
             GameObjectData objectData = item.GetComponent<Structure>().Data;
-            if (objectData.identifier == 8)
+            if (objectData.identifier == GameObjectType.Asteroid)
             {
                 asteroidsList.Add(new AsteroidLevelData(objectData.name, item.transform.position));
             }

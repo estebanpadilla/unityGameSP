@@ -4,6 +4,7 @@ class SolarStation : Structure
 
     void Start()
     {
+        isWorking = true;
         addRangeGameObject();
         gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
     }
@@ -36,7 +37,7 @@ class SolarStation : Structure
         }
         else
         {
-            counter += (Time.deltaTime * 1) * Data.efficiency;
+            counter += (Time.deltaTime * Data.efficiency);
         }
     }
 

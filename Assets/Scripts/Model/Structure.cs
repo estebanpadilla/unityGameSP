@@ -65,7 +65,7 @@ public class Structure : MonoBehaviour
 
     void OnMouseOver()
     {
-        if (!isShowEnergysourceTree && isPlaced && data.identifier != 8)
+        if (!isShowEnergysourceTree && isPlaced && data.identifier != GameObjectType.Asteroid)
         {
             showEnergySourceTree();
         }
@@ -73,7 +73,7 @@ public class Structure : MonoBehaviour
 
     void OnMouseExit()
     {
-        if (isShowEnergysourceTree && isPlaced && data.identifier != 8)
+        if (isShowEnergysourceTree && isPlaced && data.identifier != GameObjectType.Asteroid)
         {
             hideEnergySourceTree();
         }
@@ -117,7 +117,7 @@ public class Structure : MonoBehaviour
 
     public int requestEnergy(int requestedEnergy)
     {
-        if (data.identifier == 2)
+        if (data.identifier == GameObjectType.SolarStation)
         {
             return sendEnergy(requestedEnergy);
         }
@@ -147,21 +147,15 @@ public class Structure : MonoBehaviour
     {
 
         isShowEnergysourceTree = true;
-        Debug.Log(gameObject.name);
-        Debug.Log("showing EnergySourceTree");
         gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
 
-        if (data.identifier == 2 || energySources.Count == 0)
+        if (data.identifier == GameObjectType.SolarStation || energySources.Count == 0)
         {
-            Debug.Log("exit");
             return;
         }
 
         if (isShowEnergysourceTree)
         {
-            Debug.Log("showing EnergySourceTree");
-            Debug.Log(energySources.Count);
-
             foreach (GameObject item in energySources.Values)
             {
                 item.GetComponent<Structure>().showEnergySourceTree();
@@ -175,12 +169,10 @@ public class Structure : MonoBehaviour
         isShowEnergysourceTree = false;
         gameObject.GetComponent<SpriteRenderer>().color = Color.white;
 
-        if (data.identifier == 2 || energySources.Count == 0)
+        if (data.identifier == GameObjectType.SolarStation || energySources.Count == 0)
         {
-            Debug.Log("exit");
             return;
         }
-
 
         if (!isShowEnergysourceTree)
         {
