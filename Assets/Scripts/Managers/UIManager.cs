@@ -32,7 +32,7 @@ public class UIManager : MonoBehaviour
         style.normal.textColor = Color.white;
 
         debugStyle = new GUIStyle();
-        debugStyle.fontSize = 15;
+        debugStyle.fontSize = 20;
         debugStyle.normal.textColor = Color.yellow;
 
         buttonStyle = new GUIStyle();
@@ -129,7 +129,7 @@ public class UIManager : MonoBehaviour
             GUI.Label(new Rect(xpos, ypos, 220, 20), string.Concat("outs: ", text), style);
 
             ypos += 25;
-            GUI.Label(new Rect(xpos, ypos, 220, 20), string.Concat("Energy Usage: ", this.currentObject.Data.energyUsage), style);
+            GUI.Label(new Rect(xpos, ypos, 220, 20), string.Concat("Energy Require: ", this.currentObject.Data.energyRequire), style);
 
             ypos += 30;
             if (GUI.Button(new Rect(xpos, ypos, 220, 40), string.Concat("Upgrade:", this.currentObject.Data.upgradePrice), buttonStyle))

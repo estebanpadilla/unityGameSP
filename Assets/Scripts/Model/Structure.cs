@@ -11,7 +11,7 @@ public class Structure : MonoBehaviour
     protected GameObjectData data;
     protected Dictionary<string, GameObject> energySources = new Dictionary<string, GameObject>();
     protected bool isRequestingEnergy = false;
-    public bool isWorking = false;
+    public bool isOn = false;
     protected bool isAlwaysDragable = false;
 
     protected GameObject range;
@@ -23,7 +23,7 @@ public class Structure : MonoBehaviour
     public GameObjectData Data { set { this.data = value; } get { return this.data; } }
     public Dictionary<string, GameObject> EnergySources { get { return this.energySources; } set { this.energySources = value; } }
     public bool IsRequestingEnergy { get { return this.isRequestingEnergy; } set { this.isRequestingEnergy = value; } }
-    public bool IsWorking { get { return this.isWorking; } set { this.isWorking = value; } }
+    public bool IsOn { get { return this.isOn; } set { this.isOn = value; } }
     public bool IsAlwaysDragable { get { return this.isAlwaysDragable; } set { this.isAlwaysDragable = value; } }
 
     //For debugging
@@ -115,31 +115,58 @@ public class Structure : MonoBehaviour
         }
     }
 
+    //Request energy from its energy source.
+    //It will return the ammount of enegy available if any.
     public int requestEnergy(int requestedEnergy)
     {
         if (data.identifier == GameObjectType.SolarStation)
         {
+            Debug.Log("calling sendEnergy on energy station");
             return sendEnergy(requestedEnergy);
-        }
-        else if (energySources.Count == 0)
-        {
-            return -1;
         }
         else
         {
             foreach (GameObject item in energySources.Values)
             {
                 Debug.Log(("requesting energy from:" + item.name));
-                return item.GetComponent<Structure>().requestEnergy(requestedEnergy);
+                int energy = item.GetComponent<Structure>().requestEnergy(requestedEnergy);
+
+                Debug.Log(("energy: " + energy));
+                Debug.Log(("energyUsage: " + Data.energyRequire));
+
+                if (energy > 0)
+                {
+                    Debug.Log(("returning energy from:" + item.name + " energy: " + energy));
+                    return energy;
+                }
             }
         }
-
         return 0;
     }
 
     public virtual int sendEnergy(int requestedEnergy)
     {
         return 0;
+    }
+
+    public virtual void turnOn()
+    {
+
+    }
+
+    public virtual void turnOff()
+    {
+
+    }
+
+    public virtual void work()
+    {
+
+    }
+
+    public virtual void workComplete()
+    {
+
     }
 
     //Temporal methods to show energy tree

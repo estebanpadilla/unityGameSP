@@ -4,9 +4,9 @@ class SolarStation : Structure
 
     void Start()
     {
-        isWorking = true;
         addRangeGameObject();
         gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
+        turnOn();
     }
 
     void Update()
@@ -18,7 +18,7 @@ class SolarStation : Structure
         //   "productionQty": 0,
         //   "storageCty": 50,
 
-        if (!isWorking)
+        if (!isOn)
         {
             return;
         }
@@ -30,10 +30,10 @@ class SolarStation : Structure
             {
                 Data.productionQty += Data.workRate;
             }
-            else
-            {
-                isWorking = false;
-            }
+            // else
+            // {
+            //isWorking = false;
+            // }
         }
         else
         {
@@ -43,7 +43,7 @@ class SolarStation : Structure
 
     public override int sendEnergy(int requestedEnergy)
     {
-        isWorking = true;
+        //isWorking = true;
 
         if (Data.productionQty >= requestedEnergy)
         {
@@ -55,7 +55,19 @@ class SolarStation : Structure
             //check is energy storage structure is connected and send energy from there.
             return 0;
         }
+
+        Debug.Log(("No energy available" + gameObject.name));
         return 0;
+    }
+
+    public override void turnOn()
+    {
+        isOn = true;
+    }
+
+    public override void turnOff()
+    {
+        isOn = false;
     }
 
 

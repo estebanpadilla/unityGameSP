@@ -28,7 +28,7 @@ public class GameObjectData
     public string upgradeId;
     public int upgradePrice;
     public int range;
-    public int energyUsage;
+    public int energyRequire;
     public int creationTime;
 
     /*Variables use on structes that do some type of work.*/
@@ -40,7 +40,7 @@ public class GameObjectData
     /* Variable use on structres that create or produce something like, 
 	* solarStation would use to represent the energy produce and the 
 	* miner would use to represent the totalMined.*/
-    public int productionQty;
+    public float productionQty;
 
     /* Variable use on structures that need to store any type of value, 
 	* like a battery, stronghold, asteroid or in repairStation to tell 
@@ -79,7 +79,7 @@ public class GameObjectData
         data.upgradeId = this.upgradeId;
         data.upgradePrice = this.upgradePrice;
         data.range = this.range;
-        data.energyUsage = this.energyUsage;
+        data.energyRequire = this.energyRequire;
         data.creationTime = this.creationTime;
         data.workTime = this.workTime;
         data.workRate = this.workRate;
