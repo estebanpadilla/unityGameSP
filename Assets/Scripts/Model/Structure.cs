@@ -10,6 +10,9 @@ public class Structure : MonoBehaviour
     protected GameManager gameManager;
     protected GameObjectData data;
     protected Dictionary<string, GameObject> energySources = new Dictionary<string, GameObject>();
+    protected Dictionary<string, GameObject> storageStructures = new Dictionary<string, GameObject>();
+    protected Dictionary<string, GameObject> materialSources = new Dictionary<string, GameObject>();
+
     protected bool isRequestingEnergy = false;
     public bool isOn = false;
     protected bool isAlwaysDragable = false;
@@ -36,7 +39,7 @@ public class Structure : MonoBehaviour
         if (!isPlaced)
         {
             isPlaced = true;
-            gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+            turnOn();
         }
 
 
@@ -121,22 +124,22 @@ public class Structure : MonoBehaviour
     {
         if (data.identifier == GameObjectType.SolarStation)
         {
-            Debug.Log("calling sendEnergy on energy station");
+            //Debug.Log("calling sendEnergy on energy station");
             return sendEnergy(requestedEnergy);
         }
         else
         {
             foreach (GameObject item in energySources.Values)
             {
-                Debug.Log(("requesting energy from:" + item.name));
+                //Debug.Log(("requesting energy from:" + item.name));
                 int energy = item.GetComponent<Structure>().requestEnergy(requestedEnergy);
 
-                Debug.Log(("energy: " + energy));
-                Debug.Log(("energyUsage: " + Data.energyRequire));
+                //Debug.Log(("energy: " + energy));
+                //Debug.Log(("energyUsage: " + Data.energyRequire));
 
                 if (energy > 0)
                 {
-                    Debug.Log(("returning energy from:" + item.name + " energy: " + energy));
+                    //Debug.Log(("returning energy from:" + item.name + " energy: " + energy));
                     return energy;
                 }
             }
@@ -151,22 +154,56 @@ public class Structure : MonoBehaviour
 
     public virtual void turnOn()
     {
-
     }
 
     public virtual void turnOff()
     {
-
     }
 
     public virtual void work()
     {
-
     }
 
     public virtual void workComplete()
     {
+    }
 
+    public virtual void addStorageStructure(GameObject value)
+    {
+    }
+
+    public virtual void removeStorageStructure(GameObject value)
+    {
+    }
+
+    public virtual void addMaterialSource(GameObject value)
+    {
+        if (value.name != gameObject.name)
+        {
+            if (!materialSources.ContainsKey(value.name))
+            {
+                materialSources.Add(value.name, value);
+
+            }
+        }
+    }
+
+    public virtual void removeMaterialSource(GameObject value)
+    {
+        if (materialSources.ContainsKey(value.name))
+        {
+            materialSources.Remove(value.name);
+        }
+    }
+
+    public virtual bool saveProduction(int value)
+    {
+        return false;
+    }
+
+    public virtual bool useProduction(int value)
+    {
+        return false;
     }
 
     //Temporal methods to show energy tree
@@ -194,7 +231,14 @@ public class Structure : MonoBehaviour
     {
 
         isShowEnergysourceTree = false;
-        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        if (isOn)
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        }
+        else
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
+        }
 
         if (data.identifier == GameObjectType.SolarStation || energySources.Count == 0)
         {

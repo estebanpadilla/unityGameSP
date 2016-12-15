@@ -7,14 +7,13 @@ class Miner : Structure
     {
         addRangeGameObject();
         gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
-        turnOn();
     }
 
     void OnMouseUpAsButton()
     {
-        Debug.Log("request energy");
-        energy = this.requestEnergy(Data.energyRequire);
-        Debug.Log(energy);
+        //Debug.Log("request energy");
+        //energy = this.requestEnergy(Data.energyRequire);
+        //Debug.Log(energy);
 
     }
 
@@ -66,45 +65,99 @@ class Miner : Structure
 
     public override void turnOn()
     {
-        isOn = true;
-        work();
+        this.isOn = true;
+        this.work();
+        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     public override void turnOff()
     {
-        isOn = false;
+        this.isOn = false;
+        CancelInvoke();
+        gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
     }
 
     public override void work()
     {
-        this.energy = requestEnergy(this.Data.energyRequire);
-        if (this.energy == this.Data.energyRequire)
+        //Request energy and if enegy is received then it will invoke the methods workComplete else
+        //it will wait some time to try again.
+        if (this.materialSources.Count > 0)
         {
-            Invoke("workComplete", this.Data.workTime);
-        }
-        else
-        {
-            if (this.isOn)
+            this.energy = requestEnergy(this.Data.energyRequire);
+            if (this.energy == this.Data.energyRequire && !IsInvoking("workComplete"))
             {
-                Invoke("work", 5.0f);
+
+                bool didMinedAsteroid = false;
+
+                foreach (GameObject item in this.materialSources.Values)
+                {
+                    Structure asteroid = item.GetComponent<Structure>();
+                    didMinedAsteroid = asteroid.useProduction(Data.workRate);
+
+                    if (didMinedAsteroid)
+                    {
+                        Invoke("workComplete", this.Data.workTime);
+                        break;
+                    }
+                }
+
+                if (!didMinedAsteroid)
+                {
+                    this.turnOff();
+                    Debug.Log("All asteroids mined");
+                }
+
             }
             else
             {
-                Debug.Log(("Miner is off " + gameObject.name));
+                if (this.isOn && !IsInvoking("work"))
+                {
+                    Debug.Log(("TRY AGAIN IN 5 SECONDS: " + gameObject.name));
+                    this.turnOff();
+                    this.Invoke("turnOn", 5.0f);
+                }
+                else
+                {
+                    Debug.Log(("Miner is off " + gameObject.name));
+                }
             }
+        }
+        else
+        {
+            Debug.Log(("NO ASTEROIDS IN" + gameObject.name));
         }
     }
 
     public override void workComplete()
     {
-        if (Data.productionQty < Data.storageCty)
+        if (this.saveProduction(this.Data.workRate))
         {
-            Data.productionQty += (Data.workRate * Data.efficiency);
-            Invoke("work", 1.0f);
+            this.work();
         }
         else
         {
+            this.turnOff();
             Debug.Log(("NO MORE ROOM FOR MATERIAL ON " + gameObject.name));
         }
+    }
+
+    public override bool saveProduction(int value)
+    {
+        if ((this.Data.productionQty + value) <= this.Data.storageCty)
+        {
+            this.Data.productionQty += value;
+            return true;
+        }
+        return false;
+    }
+
+    public override bool useProduction(int value)
+    {
+        if (this.Data.productionQty >= value)
+        {
+            this.Data.productionQty -= value;
+            return true;
+        }
+        return false;
     }
 }

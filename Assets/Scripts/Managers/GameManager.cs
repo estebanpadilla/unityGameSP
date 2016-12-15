@@ -250,6 +250,11 @@ public class GameManager : MonoBehaviour
             //to use when the requester object is an energy station.
             if (requester.Data.identifier == GameObjectType.SolarStation)
             {
+                if (sender.Data.identifier == GameObjectType.EnergyStorage)
+                {
+                    requester.addStorageStructure(poolGO);
+                }
+
                 foreach (GameObjectType identifier in requester.Data.outs)
                 {
                     if (identifier == sender.Data.identifier)
@@ -272,10 +277,36 @@ public class GameManager : MonoBehaviour
                 {
                     if (identifier == sender.Data.identifier)
                     {
+
+                        if (requester.Data.identifier == GameObjectType.Miner &&
+                                sender.Data.identifier == GameObjectType.Asteroid)
+                        {
+                            if (isWithinRange(requesterGO.transform.position, poolGO.transform.position, requester.Data.range))
+                            {
+                                Debug.DrawLine(poolGO.transform.position, requesterGO.transform.position, Color.white);
+                                requester.addMaterialSource(poolGO);
+                            }
+                            else
+                            {
+                                requester.removeMaterialSource(poolGO);
+
+                            }
+                        }
+
                         if (isWithinRange(requesterGO.transform.position, poolGO.transform.position, sender.Data.range))
                         {
-                            Debug.DrawLine(poolGO.transform.position, requesterGO.transform.position, Color.cyan);
-                            requester.addEnergySource(poolGO);
+                            if (sender.Data.identifier == GameObjectType.SolarStation &&
+                                requester.Data.identifier == GameObjectType.EnergyStorage)
+                            {
+                                Debug.DrawLine(poolGO.transform.position, requesterGO.transform.position, Color.yellow);
+                                sender.addStorageStructure(requesterGO);
+                            }
+                            else
+                            {
+                                Debug.DrawLine(poolGO.transform.position, requesterGO.transform.position, Color.cyan);
+                                requester.addEnergySource(poolGO);
+                            }
+
                         }
                         else
                         {

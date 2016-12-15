@@ -63,8 +63,8 @@
       "upgradeId": "solarStation2",
       "upgradePrice": 200,
       "creationTime": 5,
-      "workTime": 2,
-      "workRate": 2,
+      "workTime": 1,
+      "workRate": 6,
       "efficiency": 1,
       "deficiency": 0,
       "productionQty": 0,
@@ -296,7 +296,7 @@
       "efficiency": 0,
       "deficiency": 0,
       "productionQty": 0,
-      "storageCty": 500,
+      "storageCty": 100,
       "repaireCost": 0,
       "repairEnergyCost": 5,
       "repairMaterialCost": 10,
@@ -660,12 +660,12 @@
       "upgradeId": "miner2",
       "upgradePrice": 350,
       "creationTime": 2,
-      "workTime": 3,
-      "workRate": 1,
+      "workTime": 4,
+      "workRate": 10,
       "efficiency": 1,
       "deficiency": 0,
       "productionQty": 0,
-      "storageCty": 100,
+      "storageCty": 200,
       "repaireCost": 0,
       "repairEnergyCost": 5,
       "repairMaterialCost": 20,
@@ -674,7 +674,8 @@
       "ins": [
         2,
         3,
-        4
+        4,
+        8
       ],
       "outs": [
         0
@@ -717,7 +718,8 @@
       "ins": [
         2,
         3,
-        4
+        4,
+        8
       ],
       "outs": [
         0
@@ -1010,7 +1012,7 @@
       "workRate": 0,
       "efficiency": 0,
       "deficiency": 0,
-      "productionQty": 300,
+      "productionQty": 50,
       "storageCty": 300,
       "repaireCost": 0,
       "repairEnergyCost": 0,

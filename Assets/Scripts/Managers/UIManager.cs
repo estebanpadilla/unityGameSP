@@ -207,12 +207,28 @@ public class UIManager : MonoBehaviour
                 GUI.Label(new Rect(point.x, point.y, 20, 100), ("minerals:" + data.productionQty), debugStyle);
             }
 
+            //Show minerals in asteroid
+            if (data.identifier == GameObjectType.Asteroid)
+            {
+                Vector3 point = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().WorldToScreenPoint(item.transform.position);
+                point.y = (720 - point.y);
+                GUI.Label(new Rect(point.x, point.y, 20, 100), ("Minerals:" + data.productionQty), debugStyle);
+            }
+
             //Show solar station energy level
             if (data.identifier == GameObjectType.SolarStation)
             {
                 Vector3 point = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().WorldToScreenPoint(item.transform.position);
                 point.y = (720 - point.y);
                 GUI.Label(new Rect(point.x, point.y, 20, 100), ("Energy:" + data.productionQty), debugStyle);
+            }
+
+            //Show energy storage on battery
+            if (data.identifier == GameObjectType.EnergyStorage)
+            {
+                Vector3 point = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().WorldToScreenPoint(item.transform.position);
+                point.y = (720 - point.y);
+                GUI.Label(new Rect(point.x, point.y, 20, 100), ("Stored:" + data.productionQty), debugStyle);
             }
         }
     }
