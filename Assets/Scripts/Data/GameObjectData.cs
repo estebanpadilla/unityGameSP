@@ -11,7 +11,7 @@ public enum GameObjectType
     RepairDrone,
     MaterialStorage,
     MaterialContainer,
-    MaterialDrone,
+    CargoDrone,
     Asteroid
 }
 

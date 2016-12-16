@@ -6,7 +6,7 @@ public class Player
 
     public Player()
     {
-        this.cash = 5000;
+        this.cash = 10000;
     }
 
     public bool hasEnoughCash(int value)

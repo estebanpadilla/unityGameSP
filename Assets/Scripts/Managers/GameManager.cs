@@ -10,8 +10,8 @@ public class GameManager : MonoBehaviour
     //Player game objects
     public GameObject strongholdPref;
     public GameObject solarStationPref;
-    public GameObject materialStoarePref;
-    public GameObject materialDronePref;
+    public GameObject materialStoragePref;
+    public GameObject cargoDronePref;
     public GameObject materialContainerPref;
     public GameObject enegyStoragePref;
     public GameObject relayPref;
@@ -32,8 +32,10 @@ public class GameManager : MonoBehaviour
 
     private UIManager uiManager;
     public Player player;
+    private string strongholdName = "";
 
-    private int objectCounter = 0;
+    protected int objectCounter = 0;
+    public int ObjectCounter { get { return this.objectCounter; } set { this.objectCounter = value; } }
     private Dictionary<string, GameObject> pool = new Dictionary<string, GameObject>();
     public Dictionary<string, GameObject> Pool { get { return this.pool; } set { this.pool = value; } }
 
@@ -97,12 +99,12 @@ public class GameManager : MonoBehaviour
 
     public void addMaterialDrone()
     {
-        createObject("materialDrone1", Vector3.zero, false);
+        createObject("cargoDrone1", Vector3.zero, false);
     }
 
     public void addMaterialDroneWithPosition(Vector3 position)
     {
-        createObject("materialDrone1", position, false);
+        createObject("cargoDrone1", position, false);
     }
 
     public void addRelay()
@@ -181,6 +183,7 @@ public class GameManager : MonoBehaviour
                 case "stronghold":
                     go = Instantiate(strongholdPref, position, Quaternion.identity);
                     pool.Add(name, go);
+                    strongholdName = name;
                     script = go.GetComponent<Stronghold>();
                     break;
                 case "solarStation1":
@@ -194,7 +197,7 @@ public class GameManager : MonoBehaviour
                     script = go.GetComponent<EnegyStorage>();
                     break;
                 case "materialStorage1":
-                    go = Instantiate(materialStoarePref, position, Quaternion.identity);
+                    go = Instantiate(materialStoragePref, position, Quaternion.identity);
                     pool.Add(name, go);
                     script = go.GetComponent<MaterialStorage>();
                     break;
@@ -203,10 +206,10 @@ public class GameManager : MonoBehaviour
                     pool.Add(name, go);
                     script = go.GetComponent<MaterialContainer>();
                     break;
-                case "materialDrone1":
-                    go = Instantiate(materialDronePref, position, Quaternion.identity);
+                case "cargoDrone1":
+                    go = Instantiate(cargoDronePref, position, Quaternion.identity);
                     pool.Add(name, go);
-                    script = go.GetComponent<MaterialDrone>();
+                    script = go.GetComponent<CargoDrone>();
                     break;
                 case "relay1":
                     go = Instantiate(relayPref, position, Quaternion.identity);
@@ -320,12 +323,14 @@ public class GameManager : MonoBehaviour
                         {
                             if (isWithinRange(newGameObject.transform.position, poolGameObject.transform.position, poolStructure.Data.range))
                             {
-                                Debug.DrawLine(poolGameObject.transform.position, newGameObject.transform.position, Color.white);
-                                poolStructure.addMaterialSource(newGameObject);
+                                Debug.DrawLine(poolGameObject.transform.position, newGameObject.transform.position, Color.red);
+                                poolStructure.addStorageStructure(newGameObject);
+                                break;
                             }
                             else
                             {
-                                poolStructure.removeMaterialSource(newGameObject);
+                                poolStructure.removeStorageStructure(newGameObject);
+                                break;
                             }
                         }
 
@@ -336,15 +341,14 @@ public class GameManager : MonoBehaviour
                             if (isWithinRange(newGameObject.transform.position, poolGameObject.transform.position, newStructure.Data.range))
                             {
                                 Debug.DrawLine(poolGameObject.transform.position, newGameObject.transform.position, Color.white);
-                                newStructure.addMaterialSource(poolGameObject);
+                                newStructure.addMineralSource(poolGameObject);
                             }
                             else
                             {
-                                newStructure.removeMaterialSource(poolGameObject);
+                                newStructure.removeMineralSource(poolGameObject);
 
                             }
                         }
-
 
                         //Add EnegyStorage to SolarStation
                         if (newStructure.Data.identifier == GameObjectType.EnergyStorage &&
@@ -357,7 +361,7 @@ public class GameManager : MonoBehaviour
                             }
                             else
                             {
-                                newStructure.removeMaterialSource(newGameObject);
+                                newStructure.removeStorageStructure(newGameObject);
                             }
                         }
 
@@ -427,5 +431,11 @@ public class GameManager : MonoBehaviour
         {
             createObject(item.name, item.position, false);
         }
+    }
+
+
+    public void requestDrone(GameObject target)
+    {
+        this.pool[strongholdName].GetComponent<Stronghold>().sendDrome(target);
     }
 }

@@ -11,7 +11,7 @@ public class Structure : MonoBehaviour
     protected GameObjectData data;
     protected Dictionary<string, GameObject> energySources = new Dictionary<string, GameObject>();
     protected Dictionary<string, GameObject> storageStructures = new Dictionary<string, GameObject>();
-    protected Dictionary<string, GameObject> materialSources = new Dictionary<string, GameObject>();
+    protected Dictionary<string, GameObject> mineralSources = new Dictionary<string, GameObject>();
     protected Dictionary<string, GameObject> dromes = new Dictionary<string, GameObject>();
 
     protected bool isRequestingEnergy = false;
@@ -28,7 +28,7 @@ public class Structure : MonoBehaviour
     public GameObjectData Data { set { this.data = value; } get { return this.data; } }
     public Dictionary<string, GameObject> EnergySources { get { return this.energySources; } set { this.energySources = value; } }
     public Dictionary<string, GameObject> StorageStructures { get { return this.storageStructures; } set { this.storageStructures = value; } }
-    public Dictionary<string, GameObject> MaterialSources { get { return this.materialSources; } set { this.materialSources = value; } }
+    public Dictionary<string, GameObject> MineralSources { get { return this.mineralSources; } set { this.mineralSources = value; } }
     public Dictionary<string, GameObject> Dromes { get { return this.dromes; } set { this.dromes = value; } }
     public bool IsRequestingEnergy { get { return this.isRequestingEnergy; } set { this.isRequestingEnergy = value; } }
     public bool IsOn { get { return this.isOn; } set { this.isOn = value; } }
@@ -181,23 +181,23 @@ public class Structure : MonoBehaviour
     {
     }
 
-    public virtual void addMaterialSource(GameObject value)
+    public virtual void addMineralSource(GameObject value)
     {
         if (value.name != gameObject.name)
         {
-            if (!materialSources.ContainsKey(value.name))
+            if (!mineralSources.ContainsKey(value.name))
             {
-                materialSources.Add(value.name, value);
+                mineralSources.Add(value.name, value);
 
             }
         }
     }
 
-    public virtual void removeMaterialSource(GameObject value)
+    public virtual void removeMineralSource(GameObject value)
     {
-        if (materialSources.ContainsKey(value.name))
+        if (mineralSources.ContainsKey(value.name))
         {
-            materialSources.Remove(value.name);
+            mineralSources.Remove(value.name);
         }
     }
 

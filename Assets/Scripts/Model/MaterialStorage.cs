@@ -1,7 +1,6 @@
 using UnityEngine;
 class MaterialStorage : Structure
 {
-
     void Start()
     {
         addRangeGameObject();
