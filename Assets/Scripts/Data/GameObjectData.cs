@@ -8,7 +8,10 @@ public enum GameObjectType
     Relay,
     Miner,
     RepairStation,
+    RepairDrone,
     MaterialStorage,
+    MaterialContainer,
+    MaterialDrone,
     Asteroid
 }
 
@@ -53,6 +56,7 @@ public class GameObjectData
     public int repairMaterialCost;
     public int repairTime;
     public int repairDamageRatio;
+    public int dronesCty;
 
     //Connections
     public GameObjectType[] ins;
@@ -92,6 +96,7 @@ public class GameObjectData
         data.repairMaterialCost = this.repairMaterialCost;
         data.repairTime = this.repairTime;
         data.repairDamageRatio = this.repairDamageRatio;
+        data.dronesCty = this.dronesCty;
         data.ins = this.ins;
         data.outs = this.outs;
         data.descriptions = this.descriptions;

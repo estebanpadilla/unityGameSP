@@ -12,6 +12,7 @@ public class Structure : MonoBehaviour
     protected Dictionary<string, GameObject> energySources = new Dictionary<string, GameObject>();
     protected Dictionary<string, GameObject> storageStructures = new Dictionary<string, GameObject>();
     protected Dictionary<string, GameObject> materialSources = new Dictionary<string, GameObject>();
+    protected Dictionary<string, GameObject> dromes = new Dictionary<string, GameObject>();
 
     protected bool isRequestingEnergy = false;
     public bool isOn = false;
@@ -20,11 +21,15 @@ public class Structure : MonoBehaviour
     protected GameObject range;
     private bool isPlaced = false;
     protected float counter = 0.0f;
+    protected int dromesAddedCounter = 0;
 
     //Properties
     public GameManager GameManager { get { return this.gameManager; } set { this.gameManager = value; } }
     public GameObjectData Data { set { this.data = value; } get { return this.data; } }
     public Dictionary<string, GameObject> EnergySources { get { return this.energySources; } set { this.energySources = value; } }
+    public Dictionary<string, GameObject> StorageStructures { get { return this.storageStructures; } set { this.storageStructures = value; } }
+    public Dictionary<string, GameObject> MaterialSources { get { return this.materialSources; } set { this.materialSources = value; } }
+    public Dictionary<string, GameObject> Dromes { get { return this.dromes; } set { this.dromes = value; } }
     public bool IsRequestingEnergy { get { return this.isRequestingEnergy; } set { this.isRequestingEnergy = value; } }
     public bool IsOn { get { return this.isOn; } set { this.isOn = value; } }
     public bool IsAlwaysDragable { get { return this.isAlwaysDragable; } set { this.isAlwaysDragable = value; } }
