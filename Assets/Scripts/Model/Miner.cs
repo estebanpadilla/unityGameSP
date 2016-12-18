@@ -9,6 +9,7 @@ class Miner : Structure
 
     void Start()
     {
+        this.connectionIndex = ConnectionCounter;
         addRangeGameObject();
         gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
     }
@@ -70,6 +71,7 @@ class Miner : Structure
 
     public override void turnOn()
     {
+        removeHigherConnections();
         this.isOn = true;
         this.work();
         gameObject.GetComponent<SpriteRenderer>().color = Color.white;
@@ -172,17 +174,32 @@ class Miner : Structure
     {
         if (!isDroneRequested)
         {
-            this.isDroneRequested = true;
-            this.gameManager.requestDrone(gameObject);
+            this.isDroneRequested = this.gameManager.requestDrone(gameObject);
+        }
+
+        if (!this.isDroneRequested && !IsInvoking("requestDrone"))
+        {
+            Debug.Log(("Request drone again in 20: " + gameObject.name));
+            Invoke("requestDrone", 20);
         }
     }
 
-    public int droneArrived(int cargoRequired)
+    public float droneArrived(int cargoRequired)
     {
-        this.data.productionQty -= cargoRequired;
+        float cargo = 0;
+        if (cargoRequired > this.data.productionQty)
+        {
+            cargo = this.data.productionQty;
+        }
+        else
+        {
+            cargo = cargoRequired;
+        }
+
+        this.data.productionQty -= cargo;
         this.isDroneSent = false;
         this.isDroneRequested = false;
         this.turnOn();
-        return cargoRequired;
+        return cargo;
     }
 }

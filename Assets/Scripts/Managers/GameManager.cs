@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     private UIManager uiManager;
     public Player player;
-    private string strongholdName = "";
+    private GameObject stronghold;
 
     protected int objectCounter = 0;
     public int ObjectCounter { get { return this.objectCounter; } set { this.objectCounter = value; } }
@@ -182,8 +182,8 @@ public class GameManager : MonoBehaviour
             {
                 case "stronghold":
                     go = Instantiate(strongholdPref, position, Quaternion.identity);
+                    stronghold = go;
                     pool.Add(name, go);
-                    strongholdName = name;
                     script = go.GetComponent<Stronghold>();
                     break;
                 case "solarStation1":
@@ -286,87 +286,104 @@ public class GameManager : MonoBehaviour
         {
             Structure poolStructure = poolGameObject.GetComponent<Structure>();
 
-            //to use when the requester object is an energy station.
-            if (newStructure.Data.identifier == GameObjectType.SolarStation)
+            if (newGameObject.name != poolGameObject.name)
             {
-                if (poolStructure.Data.identifier == GameObjectType.EnergyStorage)
+                //to use when the requester object is an energy station.
+                if (newStructure.Data.identifier == GameObjectType.SolarStation)
                 {
-                    newStructure.addStorageStructure(poolGameObject);
-                }
-
-                foreach (GameObjectType identifier in newStructure.Data.outs)
-                {
-                    if (identifier == poolStructure.Data.identifier)
+                    if (poolStructure.Data.identifier == GameObjectType.EnergyStorage)
                     {
-                        if (isWithinRange(newGameObject.transform.position, poolGameObject.transform.position, poolStructure.Data.range))
+                        newStructure.addStorageStructure(poolGameObject);
+                    }
+
+                    foreach (GameObjectType identifier in newStructure.Data.outs)
+                    {
+                        if (identifier == poolStructure.Data.identifier)
                         {
-                            Debug.DrawLine(poolGameObject.transform.position, newGameObject.transform.position, Color.cyan);
-                            poolStructure.addEnergySource(newGameObject);
-                        }
-                        else
-                        {
-                            poolStructure.removeEnergySource(poolGameObject);
+                            if (isWithinRange(newGameObject.transform.position, poolGameObject.transform.position, poolStructure.Data.range))
+                            {
+                                Debug.DrawLine(poolGameObject.transform.position, newGameObject.transform.position, Color.cyan);
+                                poolStructure.addEnergySource(newGameObject);
+                            }
+                            else
+                            {
+                                poolStructure.removeEnergySource(poolGameObject);
+                            }
                         }
                     }
                 }
-            }
-            else
-            {
-                foreach (GameObjectType identifier in newStructure.Data.ins)
+                else
                 {
-                    if (identifier == poolStructure.Data.identifier)
+                    foreach (GameObjectType identifier in newStructure.Data.ins)
                     {
-
-                        //Add material storage to Stronghold
-                        if (newStructure.Data.identifier == GameObjectType.MaterialStorage &&
-                            poolStructure.Data.identifier == GameObjectType.Stronghold)
+                        if (identifier == poolStructure.Data.identifier)
                         {
-                            if (isWithinRange(newGameObject.transform.position, poolGameObject.transform.position, poolStructure.Data.range))
-                            {
-                                Debug.DrawLine(poolGameObject.transform.position, newGameObject.transform.position, Color.red);
-                                poolStructure.addStorageStructure(newGameObject);
-                                break;
-                            }
-                            else
-                            {
-                                poolStructure.removeStorageStructure(newGameObject);
-                                break;
-                            }
-                        }
 
-                        //Add asteroids to Miner
-                        if (newStructure.Data.identifier == GameObjectType.Miner &&
-                            poolStructure.Data.identifier == GameObjectType.Asteroid)
-                        {
-                            if (isWithinRange(newGameObject.transform.position, poolGameObject.transform.position, newStructure.Data.range))
+                            //Add material storage to Stronghold
+                            if (newStructure.Data.identifier == GameObjectType.MaterialStorage &&
+                                poolStructure.Data.identifier == GameObjectType.Stronghold)
                             {
-                                Debug.DrawLine(poolGameObject.transform.position, newGameObject.transform.position, Color.white);
-                                newStructure.addMineralSource(poolGameObject);
+                                if (isWithinRange(newGameObject.transform.position, poolGameObject.transform.position, poolStructure.Data.range))
+                                {
+                                    Debug.DrawLine(poolGameObject.transform.position, newGameObject.transform.position, Color.red);
+                                    poolStructure.addStorageStructure(newGameObject);
+                                    break;
+                                }
+                                else
+                                {
+                                    poolStructure.removeStorageStructure(newGameObject);
+                                    break;
+                                }
                             }
-                            else
-                            {
-                                newStructure.removeMineralSource(poolGameObject);
 
-                            }
-                        }
-
-                        //Add EnegyStorage to SolarStation
-                        if (newStructure.Data.identifier == GameObjectType.EnergyStorage &&
-                            poolStructure.Data.identifier == GameObjectType.SolarStation)
-                        {
-                            if (isWithinRange(newGameObject.transform.position, poolGameObject.transform.position, poolStructure.Data.range))
+                            //Add asteroids to Miner
+                            if (newStructure.Data.identifier == GameObjectType.Miner &&
+                                poolStructure.Data.identifier == GameObjectType.Asteroid)
                             {
-                                Debug.DrawLine(poolGameObject.transform.position, newGameObject.transform.position, Color.yellow);
-                                poolStructure.addStorageStructure(newGameObject);
-                            }
-                            else
-                            {
-                                newStructure.removeStorageStructure(newGameObject);
-                            }
-                        }
+                                if (isWithinRange(newGameObject.transform.position, poolGameObject.transform.position, newStructure.Data.range))
+                                {
+                                    Debug.DrawLine(poolGameObject.transform.position, newGameObject.transform.position, Color.white);
+                                    newStructure.addMineralSource(poolGameObject);
+                                }
+                                else
+                                {
+                                    newStructure.removeMineralSource(poolGameObject);
 
-                        if (isWithinRange(newGameObject.transform.position, poolGameObject.transform.position, poolStructure.Data.range))
-                        {
+                                }
+                            }
+
+                            //Add EnegyStorage to SolarStation
+                            if (newStructure.Data.identifier == GameObjectType.EnergyStorage &&
+                                poolStructure.Data.identifier == GameObjectType.SolarStation)
+                            {
+                                if (isWithinRange(newGameObject.transform.position, poolGameObject.transform.position, poolStructure.Data.range))
+                                {
+                                    Debug.DrawLine(poolGameObject.transform.position, newGameObject.transform.position, Color.yellow);
+                                    poolStructure.addStorageStructure(newGameObject);
+                                }
+                                else
+                                {
+                                    newStructure.removeStorageStructure(newGameObject);
+                                }
+                            }
+
+
+                            //Add relay connections
+                            if (newStructure.Data.identifier == GameObjectType.Relay || poolStructure.Data.identifier == GameObjectType.Relay || poolStructure.Data.identifier == GameObjectType.SolarStation)
+                            {
+                                if (isWithinRange(newGameObject.transform.position, poolGameObject.transform.position, poolStructure.Data.range))
+                                {
+                                    Debug.DrawLine(poolGameObject.transform.position, newGameObject.transform.position, Color.yellow);
+                                    newStructure.addEnergySource(poolGameObject);
+                                }
+                                else
+                                {
+                                    newStructure.removeEnergySource(poolGameObject);
+                                }
+                            }
+
+                            // if (isWithinRange(newGameObject.transform.position, poolGameObject.transform.position, poolStructure.Data.range))
+                            // {
                             // //Add EnegyStorage to SolarStation
                             // if (newStructure.Data.identifier == GameObjectType.EnergyStorage &&
                             //     poolStructure.Data.identifier == GameObjectType.SolarStation)
@@ -377,17 +394,19 @@ public class GameManager : MonoBehaviour
                             // else
                             // {
                             //Add any other relationship
-                            Debug.DrawLine(poolGameObject.transform.position, newGameObject.transform.position, Color.cyan);
-                            newStructure.addEnergySource(poolGameObject);
+                            // Debug.DrawLine(poolGameObject.transform.position, newGameObject.transform.position, Color.cyan);
+                            // newStructure.addEnergySource(poolGameObject);
                             // }
 
-                        }
-                        else
-                        {
-                            newStructure.removeEnergySource(poolGameObject);
+                            // }
+                            // else
+                            // {
+                            // newStructure.removeEnergySource(poolGameObject);
+                            // }
                         }
                     }
                 }
+
             }
         }
     }
@@ -405,6 +424,11 @@ public class GameManager : MonoBehaviour
         {
             return false;
         }
+    }
+
+    private bool removeCircularConnections(Structure pool, string requester)
+    {
+        return true;
     }
 
     //Level data methods
@@ -434,8 +458,8 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void requestDrone(GameObject target)
+    public bool requestDrone(GameObject target)
     {
-        this.pool[strongholdName].GetComponent<Stronghold>().sendDrome(target);
+        return this.stronghold.GetComponent<Stronghold>().sendDrome(target);
     }
 }

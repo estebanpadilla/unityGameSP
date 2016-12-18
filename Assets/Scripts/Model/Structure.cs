@@ -7,6 +7,9 @@ public class Structure : MonoBehaviour
     public GameObject structureRangePref;
 
     //Instance Variables
+    protected static int connectionCounter = 1;
+    protected int connectionIndex = 1;
+
     protected GameManager gameManager;
     protected GameObjectData data;
     protected Dictionary<string, GameObject> energySources = new Dictionary<string, GameObject>();
@@ -24,6 +27,8 @@ public class Structure : MonoBehaviour
     protected int dromesAddedCounter = 0;
 
     //Properties
+    public int ConnectionCounter { get { return connectionCounter++; } }
+    public int ConnectionIndex { get { return connectionIndex; } set { this.connectionIndex = value; } }
     public GameManager GameManager { get { return this.gameManager; } set { this.gameManager = value; } }
     public GameObjectData Data { set { this.data = value; } get { return this.data; } }
     public Dictionary<string, GameObject> EnergySources { get { return this.energySources; } set { this.energySources = value; } }
@@ -101,6 +106,28 @@ public class Structure : MonoBehaviour
     public void useEnergy()
     {
         //1. request energy from source.
+
+    }
+
+    public void removeHigherConnections()
+    {
+        int previousConnection = this.connectionIndex;
+        GameObject previousGO = null;
+
+        foreach (GameObject item in energySources.Values)
+        {
+            if (item.GetComponent<Structure>().ConnectionIndex < previousConnection)
+            {
+                previousConnection = item.GetComponent<Structure>().ConnectionIndex;
+                previousGO = item;
+            }
+        }
+
+        if (previousGO != null)
+        {
+            energySources.Clear();
+            energySources.Add(previousGO.name, previousGO);
+        }
 
     }
 
@@ -257,5 +284,38 @@ public class Structure : MonoBehaviour
                 item.GetComponent<Structure>().hideEnergySourceTree();
             }
         }
+    }
+
+    public bool isLowerConnection(int index)
+    {
+        //int previousIndex = this.connectionIndex;
+        foreach (GameObject energySource in energySources.Values)
+        {
+
+
+            if (index < energySource.GetComponent<Structure>().ConnectionIndex)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+            // if (energySource.GetComponent<Structure>().EnergySources.ContainsKey(key))
+            // {
+            //     EnergySources.Remove(key);
+            //     Debug.Log(("this " + gameObject.name + "contains key: " + key));
+            //     return true;
+            // }
+            // else if (energySource.GetComponent<Structure>().removeCircularConnections(energySource.name))
+            // {
+            //     Debug.Log(("this " + gameObject.name + ", energy source: " + energySource.name + ", contains key: " + key));
+            //     return true;
+            // }
+
+            // Debug.Log(("this " + gameObject.name + " NOT contains key: " + key));
+        }
+        return true;
     }
 }

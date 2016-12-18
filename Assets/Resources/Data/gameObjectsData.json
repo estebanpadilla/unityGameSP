@@ -680,7 +680,7 @@
       "efficiency": 1,
       "deficiency": 0,
       "productionQty": 0,
-      "storageCty": 100,
+      "storageCty": 20,
       "repaireCost": 0,
       "repairEnergyCost": 5,
       "repairMaterialCost": 20,

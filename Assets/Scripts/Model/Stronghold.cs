@@ -75,7 +75,7 @@ class Stronghold : Structure
         }
     }
 
-    public void sendDrome(GameObject target)
+    public bool sendDrome(GameObject target)
     {
         if (isStorageAvailable)
         {
@@ -85,12 +85,16 @@ class Stronghold : Structure
                 minersQueue.Add(target);
                 work();
                 //this.dromes["materialDrone1_59"].GetComponent<MaterialDrone>().moveTo(target);
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
-        else
-        {
-            Debug.Log("Not able to send drone, not storage available.");
-        }
+
+        Debug.Log("Not able to send drone, not storage available.");
+        return false;
     }
 
     private bool checkMinerName(string name)
@@ -114,7 +118,7 @@ class Stronghold : Structure
             for (int i = minersQueue.Count; i > 0; i--)
             {
                 Miner miner = minersQueue[(i - 1)].GetComponent<Miner>();
-                if (miner.IsDroneRequested && !miner.IsDroneSent)
+                if (!miner.IsDroneSent)
                 {
                     foreach (GameObject droneGO in this.dromes.Values)
                     {
@@ -139,9 +143,8 @@ class Stronghold : Structure
 
     public void returnedToBase(CargoDrone drome)
     {
-
         bool materialSaved = false;
-        int cargo = drome.unloadCargo();
+        float cargo = drome.unloadCargo();
 
         if ((this.data.productionQty + cargo) < this.data.storageCty)
         {

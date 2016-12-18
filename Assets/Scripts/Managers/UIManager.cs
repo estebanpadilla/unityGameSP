@@ -157,6 +157,8 @@ public class UIManager : MonoBehaviour
             GUI.Label(new Rect(xpos, ypos, 220, 20), string.Concat("Armor: ", this.currentObject.Data.armor), style);
             ypos += 25;
             GUI.Label(new Rect(xpos, ypos, 220, 20), string.Concat("Damage: ", this.currentObject.Data.damage), style);
+            ypos += 25;
+            GUI.Label(new Rect(xpos, ypos, 220, 20), string.Concat("index: ", this.currentObject.ConnectionIndex), style);
 
 
             string text = "";

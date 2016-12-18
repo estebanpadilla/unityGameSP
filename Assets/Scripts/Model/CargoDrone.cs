@@ -3,14 +3,15 @@ using UnityEngine;
 using System.Collections;
 class CargoDrone : Structure
 {
+    private int energy = 0;
     protected Stronghold stronghold;
     public Stronghold Stronghold { get { return this.stronghold; } set { this.stronghold = value; } }
 
     protected GameObject target;
     public GameObject Target { get { return this.target; } set { this.target = value; } }
 
-    protected int cargo;
-    public int Cargo { get { return this.cargo; } set { this.cargo = value; } }
+    protected float cargo;
+    public float Cargo { get { return this.cargo; } set { this.cargo = value; } }
 
     private float speed = 2.0f;
     private float delay = 2.0f;
@@ -19,8 +20,6 @@ class CargoDrone : Structure
 
     Hashtable targetHT = new Hashtable();
     Hashtable baseHT = new Hashtable();
-
-
 
     void Start()
     {
@@ -39,6 +38,8 @@ class CargoDrone : Structure
         baseHT.Add("delay", delay);
         baseHT.Add("easetype", iTween.EaseType.easeInOutSine);
 
+        this.workComplete();
+
     }
 
     void Update()
@@ -54,20 +55,15 @@ class CargoDrone : Structure
         //         move = false;
         //         Debug.Log("reached destination");
         //     }
-
         // }
 
     }
 
+
     public void moveTo(GameObject target)
     {
-        if (!isOn)
-        {
-            this.isOn = true;
-            this.target = target;
-            targetHT["position"] = target.transform.position;
-            iTween.MoveTo(gameObject, targetHT);
-        }
+        this.target = target;
+        turnOn();
     }
 
     private void arrivedToTarget()
@@ -83,13 +79,72 @@ class CargoDrone : Structure
         Debug.Log("arrivedToBase");
         this.stronghold.returnedToBase(this);
         this.target = null;
-        this.isOn = false;
+        this.workComplete();
     }
 
-    public int unloadCargo()
+    public float unloadCargo()
     {
-        int load = this.cargo;
+        float load = this.cargo;
         this.cargo = 0;
         return load;
+    }
+
+    public override void turnOn()
+    {
+        this.isOn = true;
+        this.work();
+        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
+    public override void turnOff()
+    {
+        this.isOn = false;
+        CancelInvoke();
+        gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
+    }
+
+    public override void work()
+    {
+        //Request energy and if enegy is received then it will invoke the methods workComplete else
+
+        // this.energy = stronghold.requestEnergy(this.Data.energyRequire);
+        // if (this.energy == this.Data.energyRequire && !IsInvoking("workComplete"))
+        // {
+        targetHT["position"] = target.transform.position;
+        iTween.MoveTo(gameObject, targetHT);
+        // }
+        // else
+        // {
+        //     if (this.isOn && !IsInvoking("work"))
+        //     {
+        //         Debug.Log(("TRY AGAIN IN 5 SECONDS: " + gameObject.name));
+        //         this.turnOff();
+        //         this.Invoke("turnOn", 5.0f);
+        //     }
+        //     else
+        //     {
+        //         Debug.Log(("Drone is off " + gameObject.name));
+        //     }
+        // }
+    }
+
+    public override void workComplete()
+    {
+        chargeEnergy();
+        this.isOn = true;
+        if (this.energy == this.Data.energyRequire && !IsInvoking("workComplete"))
+        {
+            this.turnOff();
+        }
+        else
+        {
+            Debug.Log("Batteries low in drone, waiting 5 seconds");
+            Invoke("workComplete", 5);
+        }
+    }
+
+    private void chargeEnergy()
+    {
+        this.energy = stronghold.requestEnergy(this.Data.energyRequire);
     }
 }
