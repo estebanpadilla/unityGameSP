@@ -68,15 +68,16 @@ class CargoDrone : Structure
 
     private void arrivedToTarget()
     {
-        Debug.Log(("arrivedToTarget: " + this.target.name));
+        //Debug.Log(("arrivedToTarget: " + this.target.name));
         iTween.MoveTo(gameObject, baseHT);
         Miner miner = target.GetComponent<Miner>();
+        transform.LookAt(transform.position + (new Vector3(0, 0, 1)), basePosition);
         this.cargo = miner.droneArrived(this.data.storageCty);
     }
 
     private void arrivedToBase()
     {
-        Debug.Log("arrivedToBase");
+        //Debug.Log("arrivedToBase");
         this.stronghold.returnedToBase(this);
         this.target = null;
         this.workComplete();
@@ -112,6 +113,7 @@ class CargoDrone : Structure
         // {
         targetHT["position"] = target.transform.position;
         iTween.MoveTo(gameObject, targetHT);
+        transform.LookAt(transform.position + (new Vector3(0, 0, 1)), target.transform.position);
         // }
         // else
         // {
@@ -138,7 +140,7 @@ class CargoDrone : Structure
         }
         else
         {
-            Debug.Log("Batteries low in drone, waiting 5 seconds");
+            //Debug.Log("Batteries low in drone, waiting 5 seconds");
             Invoke("workComplete", 5);
         }
     }

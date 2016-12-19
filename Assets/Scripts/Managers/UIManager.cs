@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        buttonWidth = 100.0f;
+        buttonWidth = 90.0f;
         buttonHeight = 50.0f;
         style = new GUIStyle();
         style.fontSize = 20;
@@ -46,7 +46,7 @@ public class UIManager : MonoBehaviour
         solarStyle.normal.textColor = Color.white;
 
         buttonStyle = new GUIStyle();
-        buttonStyle.fontSize = 20;
+        buttonStyle.fontSize = 18;
         buttonStyle.normal.textColor = Color.black;
         buttonStyle.normal.background = buttonTexture;
         buttonStyle.alignment = TextAnchor.MiddleCenter;
@@ -54,8 +54,6 @@ public class UIManager : MonoBehaviour
 
     void OnGUI()
     {
-
-
         foreach (GameObject item in gameManager.Pool.Values)
         {
 
@@ -98,19 +96,19 @@ public class UIManager : MonoBehaviour
         //Player buttons
         xpos = 10;
         ypos = (screenHeight - (buttonHeight + 10));
-        if (GUI.Button(new Rect(xpos, ypos, buttonWidth, buttonHeight), "Solar", buttonStyle))
+        if (GUI.Button(new Rect(xpos, ypos, buttonWidth, buttonHeight), "Solar\nStation", buttonStyle))
         {
             gameManager.addSolarStation();
         }
 
         xpos += (buttonWidth + 10);
-        if (GUI.Button(new Rect(xpos, ypos, buttonWidth, buttonHeight), "Enegy \nStorage", buttonStyle))
+        if (GUI.Button(new Rect(xpos, ypos, buttonWidth, buttonHeight), "Enegy\nStorage", buttonStyle))
         {
             gameManager.addEnegyStorage();
         }
 
         xpos += (buttonWidth + 10);
-        if (GUI.Button(new Rect(xpos, ypos, buttonWidth, buttonHeight), "Meterial \nStorage", buttonStyle))
+        if (GUI.Button(new Rect(xpos, ypos, buttonWidth, buttonHeight), "Meterial\nStorage", buttonStyle))
         {
             gameManager.addMaterialStorage();
         }
@@ -122,7 +120,7 @@ public class UIManager : MonoBehaviour
         }
 
         xpos += (buttonWidth + 10);
-        if (GUI.Button(new Rect(xpos, ypos, buttonWidth, buttonHeight), "Repair", buttonStyle))
+        if (GUI.Button(new Rect(xpos, ypos, buttonWidth, buttonHeight), "Repair\nStation", buttonStyle))
         {
             gameManager.addRepairStation();
         }
@@ -132,6 +130,19 @@ public class UIManager : MonoBehaviour
         {
             gameManager.addMiner();
         }
+
+        xpos += (buttonWidth + 10);
+        if (GUI.Button(new Rect(xpos, ypos, buttonWidth, buttonHeight), "Laser", buttonStyle))
+        {
+            gameManager.addLaser();
+        }
+
+        xpos += (buttonWidth + 10);
+        if (GUI.Button(new Rect(xpos, ypos, buttonWidth, buttonHeight), "Missile\nLaunher", buttonStyle))
+        {
+            gameManager.addMissileLauncher();
+        }
+
 
         //Player data
         xpos = 10;

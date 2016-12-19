@@ -65,10 +65,17 @@ class SolarStation : Structure
 
     public override void turnOn()
     {
-        //Debug.Log(("turnOn: " + gameObject.name));
-        this.isOn = true;
-        this.work();
-        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+
+        if (this.isConnected)
+        {
+            this.isOn = true;
+            this.work();
+            gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        }
+        else
+        {
+            this.isPlaced = false;
+        }
     }
 
     public override void turnOff()

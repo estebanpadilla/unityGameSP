@@ -7,8 +7,12 @@ public class Structure : MonoBehaviour
     public GameObject structureRangePref;
 
     //Instance Variables
+    //To control the order of the connections.
     protected static int connectionCounter = 1;
     protected int connectionIndex = 1;
+
+    //Flag to know if structre was succesfully connected to some other structure to be able to place it.
+    protected bool isConnected = false;
 
     protected GameManager gameManager;
     protected GameObjectData data;
@@ -22,13 +26,14 @@ public class Structure : MonoBehaviour
     protected bool isAlwaysDragable = false;
 
     protected GameObject range;
-    private bool isPlaced = false;
+    protected bool isPlaced = false;
     protected float counter = 0.0f;
     protected int dromesAddedCounter = 0;
 
     //Properties
     public int ConnectionCounter { get { return connectionCounter++; } }
     public int ConnectionIndex { get { return connectionIndex; } set { this.connectionIndex = value; } }
+    public bool IsConnected { get { return this.isConnected; } set { this.isConnected = value; } }
     public GameManager GameManager { get { return this.gameManager; } set { this.gameManager = value; } }
     public GameObjectData Data { set { this.data = value; } get { return this.data; } }
     public Dictionary<string, GameObject> EnergySources { get { return this.energySources; } set { this.energySources = value; } }
@@ -38,6 +43,7 @@ public class Structure : MonoBehaviour
     public bool IsRequestingEnergy { get { return this.isRequestingEnergy; } set { this.isRequestingEnergy = value; } }
     public bool IsOn { get { return this.isOn; } set { this.isOn = value; } }
     public bool IsAlwaysDragable { get { return this.isAlwaysDragable; } set { this.isAlwaysDragable = value; } }
+    public bool IsPlaced { get { return this.isPlaced; } set { this.isPlaced = value; } }
 
     //For debugging
     public bool isShowEnergysourceTree = false;

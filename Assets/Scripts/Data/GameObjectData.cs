@@ -12,7 +12,9 @@ public enum GameObjectType
     MaterialStorage,
     MaterialContainer,
     CargoDrone,
-    Asteroid
+    Asteroid,
+    Laser,
+    MissileLaunchers
 }
 
 [System.Serializable]

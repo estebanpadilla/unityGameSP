@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public GameObject repairStationPref;
     public GameObject repairDromePref;
     public GameObject minerPref;
+    public GameObject laserPref;
+    public GameObject missileLauncherPref;
 
     //Level game objects
     public GameObject asteroid1Pref;
@@ -147,6 +149,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void addLaser()
+    {
+        createObject("laser1", Vector3.zero, true);
+    }
+
+    public void addMissileLauncher()
+    {
+        createObject("missileLauncher1", Vector3.zero, true);
+    }
+
     public void setCurrentObjectToDisplay(Structure value)
     {
         this.uiManager.CurrentObject = value;
@@ -256,6 +268,16 @@ public class GameManager : MonoBehaviour
                     pool.Add(name, go);
                     script = go.GetComponent<Asteroid>();
                     break;
+                case "laser1":
+                    go = Instantiate(laserPref, position, Quaternion.identity);
+                    pool.Add(name, go);
+                    script = go.GetComponent<Laser>();
+                    break;
+                case "missileLauncher1":
+                    go = Instantiate(missileLauncherPref, position, Quaternion.identity);
+                    pool.Add(name, go);
+                    script = go.GetComponent<MissileLauncher>();
+                    break;
                 default:
                     go = null;
                     script = null;
@@ -303,11 +325,13 @@ public class GameManager : MonoBehaviour
                             if (isWithinRange(newGameObject.transform.position, poolGameObject.transform.position, poolStructure.Data.range))
                             {
                                 Debug.DrawLine(poolGameObject.transform.position, newGameObject.transform.position, Color.cyan);
+                                newStructure.IsConnected = true;
                                 poolStructure.addEnergySource(newGameObject);
                             }
                             else
                             {
-                                poolStructure.removeEnergySource(poolGameObject);
+                                newStructure.IsConnected = false;
+                                poolStructure.removeEnergySource(newGameObject);
                             }
                         }
                     }
@@ -325,12 +349,14 @@ public class GameManager : MonoBehaviour
                             {
                                 if (isWithinRange(newGameObject.transform.position, poolGameObject.transform.position, poolStructure.Data.range))
                                 {
+                                    newStructure.IsConnected = true;
                                     Debug.DrawLine(poolGameObject.transform.position, newGameObject.transform.position, Color.red);
                                     poolStructure.addStorageStructure(newGameObject);
                                     break;
                                 }
                                 else
                                 {
+                                    newStructure.IsConnected = false;
                                     poolStructure.removeStorageStructure(newGameObject);
                                     break;
                                 }
@@ -363,7 +389,7 @@ public class GameManager : MonoBehaviour
                                 }
                                 else
                                 {
-                                    newStructure.removeStorageStructure(newGameObject);
+                                    poolStructure.removeStorageStructure(newGameObject);
                                 }
                             }
 

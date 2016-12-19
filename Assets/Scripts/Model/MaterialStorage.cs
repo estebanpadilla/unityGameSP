@@ -9,8 +9,16 @@ class MaterialStorage : Structure
 
     public override void turnOn()
     {
-        this.isOn = true;
-        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        if (this.isConnected)
+        {
+            this.isOn = true;
+            gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        }
+        else
+        {
+            this.isPlaced = false;
+        }
+
     }
 
     public override void turnOff()

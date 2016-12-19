@@ -11,15 +11,23 @@ class RepairStation : Structure
 
     public override void turnOn()
     {
-        this.isOn = true;
-        removeHigherConnections();
-        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-        if (this.dromesAddedCounter < this.Data.dronesCty)
+
+        if (this.energySources.Count > 0)
         {
-            addRepairDromes();
-            addRepairDromes();
-            addRepairDromes();
-            addRepairDromes();
+            this.isOn = true;
+            removeHigherConnections();
+            gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+            if (this.dromesAddedCounter < this.Data.dronesCty)
+            {
+                addRepairDromes();
+                addRepairDromes();
+                addRepairDromes();
+                addRepairDromes();
+            }
+        }
+        else
+        {
+            this.isPlaced = false;
         }
     }
 

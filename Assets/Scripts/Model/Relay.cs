@@ -6,16 +6,24 @@ public class Relay : Structure
     void Start()
     {
         this.connectionIndex = ConnectionCounter;
-        Debug.Log(("ConnectionIndex " + this.connectionIndex));
         addRangeGameObject();
         gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
     }
 
     public override void turnOn()
     {
-        this.isOn = true;
-        removeHigherConnections();
-        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        if (this.energySources.Count > 0)
+        {
+            this.isOn = true;
+            removeHigherConnections();
+            gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        }
+        else
+        {
+            this.isPlaced = false;
+        }
+
+
     }
 
     public override void turnOff()

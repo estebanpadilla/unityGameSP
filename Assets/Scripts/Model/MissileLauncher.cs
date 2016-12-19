@@ -1,20 +1,20 @@
 using UnityEngine;
-class EnegyStorage : Structure
+public class MissileLauncher : Structure
 {
-
     void Start()
     {
         this.connectionIndex = ConnectionCounter;
+        //Debug.Log(("ConnectionIndex " + this.connectionIndex));
         addRangeGameObject();
         gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
     }
 
     public override void turnOn()
     {
-        removeHigherConnections();
-        if (energySources.Count > 0)
+        if (this.energySources.Count > 0)
         {
             this.isOn = true;
+            removeHigherConnections();
             gameObject.GetComponent<SpriteRenderer>().color = Color.white;
         }
         else
@@ -30,23 +30,4 @@ class EnegyStorage : Structure
         gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
     }
 
-    public override bool saveProduction(int value)
-    {
-        if ((Data.productionQty + value) <= Data.storageCty)
-        {
-            Data.productionQty += value;
-            return true;
-        }
-        return false;
-    }
-
-    public override bool useProduction(int value)
-    {
-        if (Data.productionQty >= value)
-        {
-            Data.productionQty -= value;
-            return true;
-        }
-        return false;
-    }
 }

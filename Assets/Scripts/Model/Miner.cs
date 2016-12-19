@@ -72,9 +72,17 @@ class Miner : Structure
     public override void turnOn()
     {
         removeHigherConnections();
-        this.isOn = true;
-        this.work();
-        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+
+        if (energySources.Count > 0 && mineralSources.Count > 0)
+        {
+            this.isOn = true;
+            this.work();
+            gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        }
+        else
+        {
+            this.isPlaced = false;
+        }
     }
 
     public override void turnOff()
@@ -111,7 +119,7 @@ class Miner : Structure
                 if (!didMinedAsteroid)
                 {
                     this.turnOff();
-                    Debug.Log("All asteroids mined");
+                    //Debug.Log("All asteroids mined");
                 }
 
             }
@@ -119,19 +127,19 @@ class Miner : Structure
             {
                 if (this.isOn && !IsInvoking("work"))
                 {
-                    Debug.Log(("TRY AGAIN IN 5 SECONDS: " + gameObject.name));
+                    //Debug.Log(("TRY AGAIN IN 5 SECONDS: " + gameObject.name));
                     this.turnOff();
                     this.Invoke("turnOn", 5.0f);
                 }
                 else
                 {
-                    Debug.Log(("Miner is off " + gameObject.name));
+                    //Debug.Log(("Miner is off " + gameObject.name));
                 }
             }
         }
         else
         {
-            Debug.Log(("NO ASTEROIDS IN" + gameObject.name));
+            //Debug.Log(("NO ASTEROIDS IN" + gameObject.name));
         }
     }
 
@@ -144,9 +152,9 @@ class Miner : Structure
         else
         {
             this.turnOff();
-            Debug.Log(("NO MORE ROOM FOR MATERIAL ON " + gameObject.name));
+            //Debug.Log(("NO MORE ROOM FOR MATERIAL ON " + gameObject.name));
             requestDrone();
-            Debug.Log(("Requesting drome on " + gameObject.name));
+            //Debug.Log(("Requesting drome on " + gameObject.name));
         }
     }
 
@@ -179,7 +187,7 @@ class Miner : Structure
 
         if (!this.isDroneRequested && !IsInvoking("requestDrone"))
         {
-            Debug.Log(("Request drone again in 20: " + gameObject.name));
+            //Debug.Log(("Request drone again in 20: " + gameObject.name));
             Invoke("requestDrone", 20);
         }
     }

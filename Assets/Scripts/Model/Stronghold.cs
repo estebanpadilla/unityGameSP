@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 class Stronghold : Structure
 {
-
     public List<GameObject> minersQueue = new List<GameObject>();
     private bool isStorageAvailable = true;
 
@@ -81,7 +80,7 @@ class Stronghold : Structure
         {
             if (!checkMinerName(target.name))
             {
-                Debug.Log(("send drone to " + target.name));
+                //Debug.Log(("send drone to " + target.name));
                 minersQueue.Add(target);
                 work();
                 //this.dromes["materialDrone1_59"].GetComponent<MaterialDrone>().moveTo(target);
@@ -93,7 +92,7 @@ class Stronghold : Structure
             }
         }
 
-        Debug.Log("Not able to send drone, not storage available.");
+        //Debug.Log("Not able to send drone, not storage available.");
         return false;
     }
 
@@ -111,7 +110,7 @@ class Stronghold : Structure
 
     public override void work()
     {
-        Debug.Log("work Stronghold");
+        //Debug.Log("work Stronghold");
         if (minersQueue.Count > 0)
         {
 
@@ -125,7 +124,7 @@ class Stronghold : Structure
                         CargoDrone drome = droneGO.GetComponent<CargoDrone>();
                         if (!drome.isOn)
                         {
-                            Debug.Log(("SENDING DRONE TO: " + minersQueue[(i - 1)].name));
+                            //Debug.Log(("SENDING DRONE TO: " + minersQueue[(i - 1)].name));
                             miner.IsDroneSent = true;
                             droneGO.GetComponent<CargoDrone>().moveTo(minersQueue[(i - 1)]);
                             minersQueue.RemoveAt((i - 1));
@@ -137,7 +136,7 @@ class Stronghold : Structure
         }
         else
         {
-            Debug.Log("NO MINERS WAITING!");
+            //Debug.Log("NO MINERS WAITING!");
         }
     }
 
@@ -168,14 +167,14 @@ class Stronghold : Structure
             }
             else
             {
-                Debug.Log("There is not material storage units available.");
+                //Debug.Log("There is not material storage units available.");
             }
         }
 
         if (!materialSaved)
         {
             isStorageAvailable = false;
-            Debug.Log("Stop sending dromes.");
+            //Debug.Log("Stop sending dromes.");
         }
 
         //if (checkMinerName(drome.Target.name))
