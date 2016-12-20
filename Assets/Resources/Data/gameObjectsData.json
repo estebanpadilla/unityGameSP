@@ -1128,7 +1128,7 @@
     },
     {
       "identifier": 8,
-      "name": "materialStorage1",
+      "name": "mineralStorage1",
       "price": 200,
       "priceLost": 0.5,
       "health": 100,
@@ -1138,7 +1138,7 @@
       "fireRange": 0,
       "energyRequire": 0,
       "currentLevel": 1,
-      "upgradeId": "materialStorage2",
+      "upgradeId": "mineralStorage2",
       "upgradePrice": 0,
       "creationTime": 4,
       "workTime": 0,
@@ -1167,7 +1167,7 @@
     },
     {
       "identifier": 8,
-      "name": "materialStorage2",
+      "name": "mineralStorage2",
       "price": 200,
       "priceLost": 0.5,
       "health": 100,
@@ -1177,7 +1177,7 @@
       "fireRange": 0,
       "energyRequire": 0,
       "currentLevel": 2,
-      "upgradeId": "materialStorage3",
+      "upgradeId": "mineralStorage3",
       "upgradePrice": 0,
       "creationTime": 4,
       "workTime": 0,
@@ -1206,7 +1206,7 @@
     },
     {
       "identifier": 8,
-      "name": "materialStorage3",
+      "name": "mineralStorage3",
       "price": 200,
       "priceLost": 0.5,
       "health": 100,
@@ -1245,7 +1245,7 @@
     },
     {
       "identifier": 9,
-      "name": "materialContainer",
+      "name": "cargoContainer",
       "price": 200,
       "priceLost": 0.5,
       "health": 100,

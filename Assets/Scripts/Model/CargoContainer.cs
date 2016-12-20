@@ -1,4 +1,4 @@
-class MaterialContainer : Structure
+class CargoContainer : Structure
 {
     /// <summary>
     /// Start is called on the frame when a script is enabled just before

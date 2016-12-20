@@ -19,10 +19,10 @@ class Stronghold : Structure
 
         if (this.dromesAddedCounter < this.Data.dronesCty)
         {
-            addMaterialDromes();
-            addMaterialDromes();
-            addMaterialDromes();
-            addMaterialDromes();
+            addCargoDrone();
+            addCargoDrone();
+            addCargoDrone();
+            addCargoDrone();
         }
     }
 
@@ -33,7 +33,7 @@ class Stronghold : Structure
         gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
     }
 
-    private void addMaterialDromes()
+    private void addCargoDrone()
     {
         if (this.dromesAddedCounter < this.Data.dronesCty)
         {
@@ -156,7 +156,7 @@ class Stronghold : Structure
             {
                 foreach (GameObject storageGO in this.storageStructures.Values)
                 {
-                    MaterialStorage materialStorage = storageGO.GetComponent<MaterialStorage>();
+                    MineralStorage materialStorage = storageGO.GetComponent<MineralStorage>();
                     if ((materialStorage.Data.productionQty + cargo) < materialStorage.Data.storageCty)
                     {
                         materialSaved = true;
@@ -214,5 +214,4 @@ class Stronghold : Structure
             this.storageStructures.Remove(value.name);
         }
     }
-
 }

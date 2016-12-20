@@ -84,27 +84,27 @@ public class GameManager : MonoBehaviour
         createObject("enegyStorage1", Vector3.zero, true);
     }
 
-    public void addMaterialStorage()
+    public void addMineralStorage()
     {
-        createObject("materialStorage1", Vector3.zero, true);
+        createObject("mineralStorage1", Vector3.zero, true);
     }
 
-    public void addMaterialContainer()
+    public void addCargoContainer()
     {
-        createObject("materialContainer", Vector3.zero, false);
+        createObject("cargoContainer", Vector3.zero, false);
     }
 
-    public void addMaterialContainerWithPosition(Vector3 position)
+    public void addCargoContainerWithPosition(Vector3 position)
     {
-        createObject("materialContainer", position, false);
+        createObject("cargoContainer", position, false);
     }
 
-    public void addMaterialDrone()
+    public void addCargoDrone()
     {
         createObject("cargoDrone1", Vector3.zero, false);
     }
 
-    public void addMaterialDroneWithPosition(Vector3 position)
+    public void addCargoDroneWithPosition(Vector3 position)
     {
         createObject("cargoDrone1", position, false);
     }
@@ -208,15 +208,15 @@ public class GameManager : MonoBehaviour
                     pool.Add(name, go);
                     script = go.GetComponent<EnegyStorage>();
                     break;
-                case "materialStorage1":
+                case "mineralStorage1":
                     go = Instantiate(materialStoragePref, position, Quaternion.identity);
                     pool.Add(name, go);
-                    script = go.GetComponent<MaterialStorage>();
+                    script = go.GetComponent<MineralStorage>();
                     break;
-                case "materialContainer":
+                case "cargoContainer":
                     go = Instantiate(materialContainerPref, position, Quaternion.identity);
                     pool.Add(name, go);
-                    script = go.GetComponent<MaterialContainer>();
+                    script = go.GetComponent<CargoContainer>();
                     break;
                 case "cargoDrone1":
                     go = Instantiate(cargoDronePref, position, Quaternion.identity);
@@ -344,7 +344,7 @@ public class GameManager : MonoBehaviour
                         {
 
                             //Add material storage to Stronghold
-                            if (newStructure.Data.identifier == GameObjectType.MaterialStorage &&
+                            if (newStructure.Data.identifier == GameObjectType.MineralStorage &&
                                 poolStructure.Data.identifier == GameObjectType.Stronghold)
                             {
                                 if (isWithinRange(newGameObject.transform.position, poolGameObject.transform.position, poolStructure.Data.range))

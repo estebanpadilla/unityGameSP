@@ -61,7 +61,7 @@ public class UIManager : MonoBehaviour
 
             if (data.identifier == GameObjectType.Miner
                 || data.identifier == GameObjectType.Stronghold
-                || data.identifier == GameObjectType.MaterialStorage)
+                || data.identifier == GameObjectType.MineralStorage)
             {
                 Vector3 point = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>().WorldToScreenPoint(item.transform.position);
                 point.y = (720 - point.y);
@@ -108,9 +108,9 @@ public class UIManager : MonoBehaviour
         }
 
         xpos += (buttonWidth + 10);
-        if (GUI.Button(new Rect(xpos, ypos, buttonWidth, buttonHeight), "Meterial\nStorage", buttonStyle))
+        if (GUI.Button(new Rect(xpos, ypos, buttonWidth, buttonHeight), "Mineral\nStorage", buttonStyle))
         {
-            gameManager.addMaterialStorage();
+            gameManager.addMineralStorage();
         }
 
         xpos += (buttonWidth + 10);

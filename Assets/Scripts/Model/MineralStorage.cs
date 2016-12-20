@@ -1,5 +1,5 @@
 using UnityEngine;
-class MaterialStorage : Structure
+class MineralStorage : Structure
 {
     void Start()
     {
